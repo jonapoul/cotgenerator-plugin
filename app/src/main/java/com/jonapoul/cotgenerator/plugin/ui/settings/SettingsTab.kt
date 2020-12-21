@@ -22,7 +22,4 @@ class SettingsTab @JvmOverloads constructor(
     defStyleRes
 ) {
 
-    override fun onFullyInitialised() {
-        TODO("Not yet implemented")
-    }
 }

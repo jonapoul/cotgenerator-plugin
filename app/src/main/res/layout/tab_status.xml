@@ -18,48 +18,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:gravity="center_vertical|end"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/sort_alpha_button"
-            style="@style/darkButton"
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="@dimen/footer_image_size"
-            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/footer_image_padding"
-            android:src="@drawable/sort_alpha" />
+            android:gravity="center"
+            android:text="@string/status_sort_by" />
 
-        <ImageButton
-            android:id="@+id/sort_time_button"
+        <com.atakmap.android.gui.PluginSpinner
+            android:id="@+id/sort_type_spinner"
             style="@style/darkButton"
             android:layout_width="0dp"
-            android:layout_height="@dimen/footer_image_size"
-            android:layout_margin="@dimen/footer_button_margin"
-            android:layout_weight="1"
-            android:padding="@dimen/footer_image_padding"
-            android:src="@drawable/sort_time" />
+            android:layout_height="@dimen/status_spinner_height"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:prompt="@string/status_sort_type" />
 
-        <ImageButton
-            android:id="@+id/sort_team_button"
+        <com.atakmap.android.gui.PluginSpinner
+            android:id="@+id/sort_order_spinner"
             style="@style/darkButton"
             android:layout_width="0dp"
-            android:layout_height="@dimen/footer_image_size"
-            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_height="@dimen/status_spinner_height"
             android:layout_weight="1"
-            android:padding="@dimen/footer_image_padding"
-            android:src="@drawable/sort_team" />
-
-        <ImageButton
-            android:id="@+id/sort_role_button"
-            style="@style/darkButton"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/footer_image_size"
-            android:layout_margin="@dimen/footer_button_margin"
-            android:layout_weight="1"
-            android:padding="@dimen/footer_image_padding"
-            android:src="@drawable/sort_role" />
+            android:gravity="center"
+            android:prompt="@string/status_sort_order" />
 
     </LinearLayout>
 

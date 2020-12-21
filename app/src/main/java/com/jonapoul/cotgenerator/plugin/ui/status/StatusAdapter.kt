@@ -11,16 +11,17 @@ import com.atakmap.android.maps.MapGroup
 import com.atakmap.android.maps.MapItem
 import com.atakmap.android.maps.MapTouchController
 import com.atakmap.android.maps.MapView
-import com.atakmap.android.math.MathUtils
 import com.atakmap.android.util.ATAKUtilities
 import com.atakmap.coremap.maps.time.CoordinatedTime
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.utils.CotMetadata
+import com.jonapoul.cotgenerator.plugin.utils.TimeUtils
 
 
 internal class StatusAdapter(
     private val pluginContext: Context,
     mapView: MapView,
+) : RecyclerView.Adapter<StatusAdapter.ViewHolder>() {
 
     private val mapItems = ArrayList<MapItem>()
 
@@ -48,11 +49,7 @@ internal class StatusAdapter(
 
         val now = CoordinatedTime().milliseconds
         val elapsed = now - mapItem.getMetaLong("lastUpdateTime", 0)
-        holder.lastUpdate.text = MathUtils.GetTimeRemainingOrDateString(
-            now,
-            elapsed,
-            SHOW_OLD_TIMES_AS_DATE
-        )
+        holder.lastUpdate.text = TimeUtils.lastHeardTime(elapsed)
     }
 
     override fun getItemCount(): Int = mapItems.size
@@ -62,21 +59,35 @@ internal class StatusAdapter(
         notifyDataSetChanged()
     }
 
+    fun updateItem(item: MapItem) {
+        val index = mapItems.indexOfFirst { it.uid == item.uid }
+        if (index == -1) {
+            addItem(item)
+        } else {
+            mapItems[index] = item
+        }
+    }
+
     fun removeItem(item: MapItem) {
         mapItems.remove(item)
         notifyDataSetChanged()
     }
 
-    fun sortBy(sortingType: StatusSortingType) {
-        when (sortingType) {
-            StatusSortingType.ALPHABET ->
-                mapItems.sortBy { it.getMetaString(CotMetadata.CALLSIGN, "") }
-            StatusSortingType.TIME ->
-                mapItems.sortBy { it.getMetaLong(CotMetadata.LAST_UPDATE, 0) }
-            StatusSortingType.TEAM ->
-                mapItems.sortBy { it.getMetaInteger(CotMetadata.TEAM, 0) }
-            StatusSortingType.ROLE ->
-                mapItems.sortBy { it.getMetaString(CotMetadata.ROLE, "") }
+    fun sortAndUpdate(sortingType: SortingType, sortingOrder: SortingOrder) {
+        /* I couldn't figure out a nicer-looking way of doing this. Deal with it */
+        when (sortingOrder) {
+            SortingOrder.ASCENDING -> when(sortingType) {
+                SortingType.CALLSIGN -> mapItems.sortBy(SORT_ALPHA)
+                SortingType.TIME -> mapItems.sortBy(SORT_TIME)
+                SortingType.TEAM -> mapItems.sortBy(SORT_TEAM)
+                SortingType.ROLE -> mapItems.sortBy(SORT_ROLE)
+            }
+            SortingOrder.DESCENDING -> when(sortingType) {
+                SortingType.CALLSIGN -> mapItems.sortByDescending(SORT_ALPHA)
+                SortingType.TIME -> mapItems.sortByDescending(SORT_TIME)
+                SortingType.TEAM -> mapItems.sortByDescending(SORT_TEAM)
+                SortingType.ROLE -> mapItems.sortByDescending(SORT_ROLE)
+            }
         }
         notifyDataSetChanged()
     }
@@ -109,10 +120,13 @@ internal class StatusAdapter(
     }
 
     private companion object {
-        /* If the map item is old, display as "1 week ago" instead of "2020-12-01" or whatever */
-        const val SHOW_OLD_TIMES_AS_DATE = false
-
         /* When we click a list item, go to that item on the map and open its radial menu */
         const val SELECT_MAP_ITEM_ON_CLICK = true
+
+        /* Some pre-constructed sorting schemas, to be called in sortBy() */
+        val SORT_ALPHA: (MapItem) -> String = { it.getMetaString(CotMetadata.CALLSIGN, "") }
+        val SORT_TIME: (MapItem) -> Long = { it.getMetaLong(CotMetadata.LAST_UPDATE, 0L) }
+        val SORT_TEAM: (MapItem) -> Int = { it.getMetaInteger(CotMetadata.TEAM, 0) }
+        val SORT_ROLE: (MapItem) -> String = { it.getMetaString(CotMetadata.CALLSIGN, "") }
     }
 }

@@ -27,7 +27,9 @@ class HomeTab @JvmOverloads constructor(
     private lateinit var startStopButton: Button
     private lateinit var settingsButton: Button
 
-    override fun onFullyInitialised() {
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
         startStopButton = findViewById(R.id.start_stop_button)
         settingsButton = findViewById(R.id.settings_button)
 

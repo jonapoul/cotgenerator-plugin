@@ -1,9 +1,9 @@
 package com.jonapoul.cotgenerator.plugin.ui
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.util.AttributeSet
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
@@ -20,35 +20,21 @@ abstract class BaseTab @JvmOverloads constructor(
 
     init {
         inflate(pluginContext, layoutRes, this)
-        Timber.d("init ${this.javaClass.simpleName}")
+        Timber.i("init ${this.javaClass.simpleName}")
     }
 
-    private var hasInflated = false
-    private var hasMapView = false
-    private var hasInitialised = false
-
-    protected val prefs = PreferenceManager.getDefaultSharedPreferences(pluginContext)
+    protected lateinit var prefs: SharedPreferences
     protected lateinit var mapView: MapView
 
-    protected abstract fun onFullyInitialised()
-
     fun setMap(mv: MapView) {
-        Timber.d("setMap $mv")
+        Timber.i("setMap $mv")
         mapView = mv
-        hasMapView = true
-        if (shouldInitialise()) {
-            onFullyInitialised()
-        }
+        prefs = PreferenceManager.getDefaultSharedPreferences(mapView.context)
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        Timber.d("onFinishInflate ${this.javaClass.simpleName}")
-        hasInflated = true
-        if (shouldInitialise()) {
-            onFullyInitialised()
-        }
+    @CallSuper
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        Timber.i("onAttachedToWindow ${this.javaClass.simpleName}")
     }
-
-    private fun shouldInitialise() = hasMapView and hasInflated and !hasInitialised
 }
