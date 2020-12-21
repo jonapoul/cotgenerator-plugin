@@ -7,29 +7,6 @@
     android:orientation="horizontal"
     android:padding="@dimen/map_item_list_row_padding">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/map_item_list_row_padding">
-
-        <TextView
-            android:id="@+id/index"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/subheader_font_size"
-            tools:text="1" />
-
-        <TextView
-            android:id="@+id/icon_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/subheader_font_size"
-            tools:text="100" />
-
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/map_item_list_row_image_size"
@@ -38,9 +15,10 @@
         tools:ignore="ContentDescription" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/map_item_list_row_padding"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
@@ -59,5 +37,12 @@
             tools:text="0m 15s ago" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/subheader_font_size"
+        tools:text="1/10" />
 
 </LinearLayout>

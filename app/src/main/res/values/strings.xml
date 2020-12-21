@@ -9,6 +9,9 @@
     <string name="tab_status">Status</string>
     <string name="tab_settings">Settings</string>
 
+    <!-- Status -->
+    <string name="status_row_index">%1$d/%2$d</string>
+
     <!-- Settings -->
     <string name="settings_summary">CoT Generator Configuration</string>
     <string name="settings_key">cotGeneratorPreferences</string>
