@@ -39,11 +39,6 @@ internal class StatusAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val mapItem = mapItems[position]
 
-        holder.index.text = pluginContext.getString(
-            R.string.status_row_index,
-            position,
-            itemCount
-        )
         ATAKUtilities.setIcon(holder.icon, mapItem)
         holder.callsign.text = mapItem.title
 
@@ -101,7 +96,6 @@ internal class StatusAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view),
         View.OnClickListener {
-        val index: TextView = view.findViewById(R.id.index)
         val icon: ImageView = view.findViewById(R.id.icon)
         val callsign: TextView = view.findViewById(R.id.callsign)
         val lastUpdate: TextView = view.findViewById(R.id.last_update)

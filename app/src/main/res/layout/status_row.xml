@@ -5,44 +5,30 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="@dimen/map_item_list_row_padding">
+    android:padding="@dimen/status_row_padding">
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="@dimen/map_item_list_row_image_size"
-        android:layout_height="@dimen/map_item_list_row_image_size"
+        android:layout_width="@dimen/status_row_image_size"
+        android:layout_height="@dimen/status_row_image_size"
         android:src="@drawable/start"
         tools:ignore="ContentDescription" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/callsign"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/map_item_list_row_padding"
+        android:layout_marginStart="@dimen/status_row_padding"
         android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/callsign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFF"
-            android:textSize="@dimen/font_size"
-            tools:text="Callsign" />
-
-        <TextView
-            android:id="@+id/last_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/subheader_font_size"
-            tools:text="0m 15s ago" />
-
-    </LinearLayout>
+        android:textColor="#FFF"
+        android:textSize="@dimen/font_size"
+        tools:text="Callsign" />
 
     <TextView
-        android:id="@+id/index"
+        android:id="@+id/last_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/subheader_font_size"
-        tools:text="1/10" />
+        tools:text="0m 15s ago" />
 
 </LinearLayout>
