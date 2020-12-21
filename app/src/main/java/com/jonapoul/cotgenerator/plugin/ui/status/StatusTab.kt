@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.atakmap.android.maps.MapEvent
 import com.atakmap.android.maps.MapEventDispatcher
+import com.atakmap.android.util.time.TimeListener
+import com.atakmap.android.util.time.TimeViewUpdater
+import com.atakmap.coremap.maps.time.CoordinatedTime
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.ui.BaseTab
 import com.jonapoul.cotgenerator.plugin.utils.CotMetadata
@@ -23,7 +26,8 @@ class StatusTab @JvmOverloads constructor(
     attrs,
     defStyleAttr,
     defStyleRes
-), MapEventDispatcher.MapEventDispatchListener {
+), MapEventDispatcher.MapEventDispatchListener,
+    TimeListener {
 
     private lateinit var adapter: StatusAdapter
 
@@ -31,6 +35,8 @@ class StatusTab @JvmOverloads constructor(
     private lateinit var sortTimeButton: ImageButton
     private lateinit var sortTeamButton: ImageButton
     private lateinit var sortRoleButton: ImageButton
+
+    private lateinit var timeUpdater: TimeViewUpdater
 
     override fun onFullyInitialised() {
         adapter = StatusAdapter(pluginContext, mapView)
@@ -54,9 +60,22 @@ class StatusTab @JvmOverloads constructor(
             }
         }
 
-        setCurrentSortingType(
-            sortingType = StatusSortingType.getFromPrefs(prefs)
-        )
+        mapView.mapEventDispatcher.also {
+            it.addMapEventListener(MapEvent.ITEM_REMOVED, this)
+            it.addMapEventListener(MapEvent.ITEM_ADDED, this)
+        }
+
+        timeUpdater = TimeViewUpdater(mapView, TIME_UPDATE_FREQUENCY_MS)
+        timeUpdater.register(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        mapView.mapEventDispatcher.also {
+            it.removeMapEventListener(MapEvent.ITEM_REMOVED, this)
+            it.removeMapEventListener(MapEvent.ITEM_ADDED, this)
+        }
+        timeUpdater.unregister(this)
     }
 
     override fun onMapEvent(event: MapEvent) {
@@ -71,7 +90,19 @@ class StatusTab @JvmOverloads constructor(
         }
 
         /* Update the displayed list */
-        adapter.notifyDataSetChanged()
+        mapView.post {
+            if (isVisible) {
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    override fun onTimeChanged(oldTime: CoordinatedTime?, newTime: CoordinatedTime?) {
+        if (isVisible) {
+            /* Re-apply our sort once per second. This will also call notifyDataSetChanged and
+             * refresh the UI */
+            adapter.sortBy(currentSortingType)
+        }
     }
 
     private fun allSortButtons() = mapOf(
@@ -88,5 +119,8 @@ class StatusTab @JvmOverloads constructor(
 
         /* Tell the adapter to sort our list elements */
         adapter.sortBy(sortingType)
+
+    private companion object {
+        const val TIME_UPDATE_FREQUENCY_MS = 1000L
     }
 }
