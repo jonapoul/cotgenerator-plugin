@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
+
+    <!-- Main Body -->
+    <com.jonapoul.cotgenerator.plugin.ui.status.AtakRecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Footer -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:gravity="center_vertical|end"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/sort_alpha_button"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/footer_image_size"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_weight="1"
+            android:padding="@dimen/footer_image_padding"
+            android:src="@drawable/sort_alpha" />
+
+        <ImageButton
+            android:id="@+id/sort_time_button"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/footer_image_size"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_weight="1"
+            android:padding="@dimen/footer_image_padding"
+            android:src="@drawable/sort_time" />
+
+        <ImageButton
+            android:id="@+id/sort_team_button"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/footer_image_size"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_weight="1"
+            android:padding="@dimen/footer_image_padding"
+            android:src="@drawable/sort_team" />
+
+        <ImageButton
+            android:id="@+id/sort_role_button"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/footer_image_size"
+            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_weight="1"
+            android:padding="@dimen/footer_image_padding"
+            android:src="@drawable/sort_role" />
+
+    </LinearLayout>
+
+</LinearLayout>

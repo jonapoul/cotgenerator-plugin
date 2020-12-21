@@ -1,0 +1,240 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'atak-takdev-plugin'
+
+buildscript {
+    ext.ATAK_VERSION = versions.atak
+
+    ext.getValueFromPropertiesFile = { propFile, key ->
+        if (!propFile.isFile() || !propFile.canRead())
+            return null
+        def prop = new Properties()
+        def reader = propFile.newReader()
+        try {
+            prop.load(reader)
+        } finally {
+            reader.close()
+        }
+        return prop.get(key)
+    }
+
+    def getProperty = { name, defValue ->
+        def prop = project.properties[name] ?:
+                getValueFromPropertiesFile(project.rootProject.file('local.properties'), name)
+        return (null == prop) ? defValue : prop
+    }
+
+    def urlKey = 'takrepo.url'
+
+    ext.isDevKitEnabled = { ->
+        return getProperty(urlKey, null) != null
+    }
+
+    ext.takrepoUrl = getProperty(urlKey, 'http://localhost/')
+    ext.takrepoUser = getProperty('takrepo.user', 'invalid')
+    ext.takrepoPassword = getProperty('takrepo.password', 'invalid')
+    ext.takdevPlugin = getProperty('takdev.plugin', "${rootDir}/atak-gradle-takdev-${versions.takdev}.jar")
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$versions.gradle"
+        if (isDevKitEnabled()) {
+            classpath "com.atakmap.gradle:atak-gradle-takdev:$versions.takdev"
+        } else {
+            classpath files(takdevPlugin)
+        }
+    }
+}
+
+dependencies {
+    compileOnly files('libs/main.jar')
+    testCompileOnly files('libs/main.jar')
+    androidTestCompileOnly files('libs/main.jar')
+
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+    implementation "androidx.core:core-ktx:$versions.androidx_core"
+    implementation "androidx.fragment:fragment-ktx:$versions.fragment"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation "com.jakewharton.timber:timber:$versions.timber"
+
+    // Recyclerview version depends on some androidx libraries which
+    // are supplied by core, so they should be excluded.  Otherwise
+    // bad things happen in the release builds after proguarding
+    implementation("androidx.recyclerview:recyclerview:$versions.recyclerview") {
+        exclude module: 'collection'
+        exclude module: 'core'
+        exclude module: 'lifecycle'
+        exclude module: 'core-common'
+        exclude module: 'collection'
+        exclude module: 'customview'
+    }
+
+    testImplementation "io.mockk:mockk:$versions.mockk"
+    testImplementation "junit:junit:$versions.junit"
+
+    androidTestImplementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
+}
+
+// Attempt to get a suitable version name for the plugin based on
+// either a git or svn repository
+def getVersionName() {
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-parse', '--short=8', 'HEAD'
+            standardOutput = stdout
+        }
+        def describe = stdout.toString().trim()
+        println("versionName[git]: $describe")
+        return describe
+    } catch (Exception ignored) {
+        println("error occured, using revision of 1")
+        return 1
+    }
+}
+
+
+// Attempt to get a suitable version code for the plugin based on
+// either a git or svn repository
+def getVersionCode() {
+    try {
+        new ByteArrayOutputStream().withStream { os ->
+            exec {
+                executable = 'git'
+                args = ['show', '-s', '--format=%ct']
+                standardOutput = os
+                ignoreExitValue = true
+            }
+            def outputAsString = os.toString()
+            ext.revision = "$outputAsString".toInteger()
+            println("version[git]: $revision")
+        }
+    } catch (Exception ignored) {
+        println("error occured, using revision of 1")
+        ext.revision = 1
+    }
+    return revision
+}
+
+android {
+    compileSdkVersion versions.targetSdk
+    buildToolsVersion versions.buildTools
+
+    dexOptions {
+        jumboMode = true
+    }
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86"
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds true
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError true
+    }
+
+    def properties = project.rootProject.file('local.properties')
+    signingConfigs {
+        debug {
+            def kf = getValueFromPropertiesFile(properties, 'takDebugKeyFile')
+            def kfp = getValueFromPropertiesFile(properties, 'takDebugKeyFilePassword')
+            def ka = getValueFromPropertiesFile(properties, 'takDebugKeyAlias')
+            def kp = getValueFromPropertiesFile(properties, 'takDebugKeyPassword')
+
+            if (kf == null) {
+                throw new GradleException("No signing key configured!")
+            }
+
+            storeFile file(kf)
+            if (kfp != null) storePassword kfp
+            if (ka != null) keyAlias ka
+            if (kp != null) keyPassword kp
+        }
+        release {
+            def kf = getValueFromPropertiesFile(properties, 'takReleaseKeyFile')
+            def kfp = getValueFromPropertiesFile(properties, 'takReleaseKeyFilePassword')
+            def ka = getValueFromPropertiesFile(properties, 'takReleaseKeyAlias')
+            def kp = getValueFromPropertiesFile(properties, 'takReleaseKeyPassword')
+
+            if (kf == null) {
+                throw new GradleException("No signing key configured!")
+            }
+
+            storeFile file(kf)
+            if (kfp != null) storePassword kfp
+            if (ka != null) keyAlias ka
+            if (kp != null) keyPassword kp
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            matchingFallbacks = ['sdk']
+        }
+
+        release {
+            minifyEnabled true
+            proguardFile 'proguard-gradle.txt'
+            signingConfig signingConfigs.release
+            matchingFallbacks = ['odk']
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/INDEX.LIST'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    sourceSets {
+        main {
+            setProperty("archivesBaseName", "ATAK-Plugin-${rootProject.name}-${versions.cotgenerator_plugin}-${getVersionName()}-${versions.atak}")
+            defaultConfig.versionCode = getVersionCode()
+            defaultConfig.versionName = "${versions.cotgenerator_plugin} (${getVersionName()}) - [${versions.atak}]"
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        //instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+
+    }
+
+    flavorDimensions "application"
+    productFlavors {
+        civ {
+            dimension "application"
+            manifestPlaceholders = [atakApiVersion: "com.atakmap.app@" + ATAK_VERSION + ".CIV"]
+            buildConfigField 'String', 'ATAK_PACKAGE_NAME', '"com.atakmap.app.civ"'
+        }
+        applicationVariants.all { variant ->
+            variant.resValue "string", "versionName", variant.versionName
+        }
+    }
+
+    if (file("$project.projectDir/../espresso/testSetup.gradle").exists()) {
+        apply from: '../espresso/testSetup.gradle'
+    } else {
+        println("espresso test harness not found")
+    }
+}

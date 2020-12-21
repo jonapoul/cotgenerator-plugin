@@ -1,0 +1,39 @@
+buildscript {
+    apply from: "$rootProject.projectDir/versions.gradle"
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$versions.gradle"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+    }
+}
+
+allprojects {
+    apply from: "$rootProject.projectDir/versions.gradle"
+
+    buildscript {
+        repositories {
+            google()
+            jcenter()
+            mavenCentral()
+            maven { url 'https://jitpack.io' }
+        }
+    }
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

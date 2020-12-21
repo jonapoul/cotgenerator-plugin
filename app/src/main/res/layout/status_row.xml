@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/map_item_list_row_padding">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/map_item_list_row_padding">
+
+        <TextView
+            android:id="@+id/index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/subheader_font_size"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/icon_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/subheader_font_size"
+            tools:text="100" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/map_item_list_row_image_size"
+        android:layout_height="@dimen/map_item_list_row_image_size"
+        android:src="@drawable/start"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/map_item_list_row_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/callsign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textSize="@dimen/font_size"
+            tools:text="Callsign" />
+
+        <TextView
+            android:id="@+id/last_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/subheader_font_size"
+            tools:text="0m 15s ago" />
+
+    </LinearLayout>
+
+</LinearLayout>

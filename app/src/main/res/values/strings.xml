@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">CoT Generator</string>
+    <string name="app_desc">Generates and transmits moving fake icons.</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_status">Status</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- Settings -->
+    <string name="settings_summary">CoT Generator Configuration</string>
+    <string name="settings_key">cotGeneratorPreferences</string>
+
+</resources>
+

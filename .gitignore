@@ -1,0 +1,9 @@
+build/
+.gradle/
+gradle/
+.idea/
+.takdev/
+keystore/
+atak-gradle-takdev-*.jar
+local.properties
+app/libs/main.jar

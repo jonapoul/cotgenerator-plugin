@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- font size big enough for most things; MGRS coordinate, etc, so at least ~18 characters of MGRS in a typical dropdown width -->
+    <dimen name="font_size">14sp</dimen>
+
+    <dimen name="subheader_font_size">12sp</dimen>
+
+    <dimen name="map_item_list_row_image_size">32dp</dimen>
+    <dimen name="map_item_list_row_padding">4dp</dimen>
+
+    <dimen name="footer_button_margin">8dp</dimen>
+    <dimen name="footer_image_size">32dp</dimen>
+    <dimen name="footer_image_padding">4dp</dimen>
+
+</resources>
+
