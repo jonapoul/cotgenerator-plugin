@@ -24,7 +24,7 @@ class GeneratorTool(private val context: Context) : Tool(), ToolDescriptor {
 
     override fun getIcon(): Drawable = ResourcesCompat.getDrawable(
         context.resources,
-        R.drawable.icon_48,
+        R.drawable.plugin_icon,
         context.theme
     )!!
 

@@ -37,7 +37,7 @@ class GeneratorMapComponent : DropDownMapComponent() {
                 pluginContext.getString(R.string.settings_key),
                 ResourcesCompat.getDrawable(
                     pluginContext.resources,
-                    R.drawable.icon_48,
+                    R.drawable.plugin_icon,
                     null
                 ),
                 MainPreferenceFragment(pluginContext)

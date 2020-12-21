@@ -3,18 +3,18 @@
     <item
         android:state_enabled="true"
         android:state_pressed="true"
-        android:drawable="@drawable/new_dark_button_selected" />
+        android:drawable="@drawable/button_selected" />
     <item
         android:state_enabled="true"
         android:state_selected="true"
-        android:drawable="@drawable/new_dark_button_selected" />
-    <item 
+        android:drawable="@drawable/button_selected" />
+    <item
         android:state_enabled="true"
-        android:state_checked="true" 
-        android:drawable="@drawable/new_dark_button_selected"  />
+        android:state_checked="true"
+        android:drawable="@drawable/button_selected"  />
     <item
         android:state_enabled="false"
-        android:drawable="@drawable/new_dark_button_disabled" />
+        android:drawable="@drawable/button_disabled" />
     <item
-        android:drawable="@drawable/new_dark_button_bg" />
+        android:drawable="@drawable/button_regular" />
 </selector>

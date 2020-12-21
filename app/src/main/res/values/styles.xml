@@ -40,7 +40,7 @@
 
     <!-- ==== Style for ISRV Dark Buttons ==== -->
     <style name="darkButton" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/btn_gray</item>
+        <item name="android:background">@drawable/button_background_selector</item>
         <item name="android:shadowColor">@color/darker_grey</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
