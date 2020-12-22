@@ -3,7 +3,6 @@ build/
 gradle/
 .idea/
 .takdev/
-keystore/
-atak-gradle-takdev-*.jar
+keystore/*.keystore
 local.properties
-app/libs/main.jar
+libs/*.jar

@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'atak-takdev-plugin'
 
 buildscript {
@@ -34,7 +33,7 @@ buildscript {
     ext.takrepoUrl = getProperty(urlKey, 'http://localhost/')
     ext.takrepoUser = getProperty('takrepo.user', 'invalid')
     ext.takrepoPassword = getProperty('takrepo.password', 'invalid')
-    ext.takdevPlugin = getProperty('takdev.plugin', "${rootDir}/atak-gradle-takdev-${versions.takdev}.jar")
+    ext.takdevPlugin = getProperty('takdev.plugin', "${rootDir}/libs/atak-gradle-takdev-${versions.takdev}.jar")
 
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.gradle"
@@ -47,9 +46,9 @@ buildscript {
 }
 
 dependencies {
-    compileOnly files('libs/main.jar')
-    testCompileOnly files('libs/main.jar')
-    androidTestCompileOnly files('libs/main.jar')
+    implementation files('../libs/main.jar')
+    testImplementation files('../libs/main.jar')
+    androidTestImplementation files('../libs/main.jar')
 
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
     implementation "androidx.core:core-ktx:$versions.androidx_core"

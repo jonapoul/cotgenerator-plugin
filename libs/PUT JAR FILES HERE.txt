@@ -1,0 +1,3 @@
+this folder should contain:
+- main.jar
+- atak-gradle-takdev-${takdev_version}.jar
