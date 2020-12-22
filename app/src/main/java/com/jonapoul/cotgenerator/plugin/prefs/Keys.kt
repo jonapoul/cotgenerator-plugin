@@ -3,6 +3,8 @@ package com.jonapoul.cotgenerator.plugin.prefs
 object Keys {
     private const val PREFIX = "com.jonapoul.cotgenerator.plugin."
 
-    const val SORTING_TYPE = "${PREFIX}sorting_type"
-    const val SORTING_ORDER = "${PREFIX}sorting_order"
+    val SORTING_TYPE = get("sorting_type")
+    val SORTING_ORDER = get("sorting_order")
+
+    private fun get(key: String) = "${PREFIX}${key}"
 }

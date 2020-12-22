@@ -1,6 +1,9 @@
 package com.jonapoul.cotgenerator.plugin.prefs
 
+import com.jonapoul.cotgenerator.plugin.ui.status.SortingOrder
+import com.jonapoul.cotgenerator.plugin.ui.status.SortingType
+
 object Defaults {
-    const val SORTING_TYPE = 0
-    const val SORTING_ORDER = 0
+    val SORTING_TYPE = SortingType.CALLSIGN.ordinal
+    val SORTING_ORDER = SortingOrder.ASCENDING.ordinal
 }

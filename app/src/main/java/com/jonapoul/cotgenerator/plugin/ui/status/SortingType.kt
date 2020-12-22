@@ -3,7 +3,7 @@ package com.jonapoul.cotgenerator.plugin.ui.status
 import android.content.SharedPreferences
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
-import com.jonapoul.cotgenerator.plugin.prefs.getIntFromPair
+import com.jonapoul.sharedprefs.getIntFromPair
 import timber.log.Timber
 
 internal enum class SortingType(private val str: String) {
