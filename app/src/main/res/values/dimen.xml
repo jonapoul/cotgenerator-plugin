@@ -3,6 +3,7 @@
     
     <!-- font size big enough for most things; MGRS coordinate, etc, so at least ~18 characters of MGRS in a typical dropdown width -->
     <dimen name="font_size">14sp</dimen>
+    <dimen name="smaller_font_size">12sp</dimen>
 
     <dimen name="subheader_font_size">12sp</dimen>
 
@@ -14,5 +15,7 @@
     <dimen name="footer_image_size">32dp</dimen>
     <dimen name="footer_image_padding">4dp</dimen>
 
+    <dimen name="about_row_margin_horizontal">16dp</dimen>
+    <dimen name="about_row_margin_vertical">5dp</dimen>
 </resources>
 

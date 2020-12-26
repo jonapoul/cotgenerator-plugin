@@ -1,13 +1,12 @@
 package com.jonapoul.cotgenerator.plugin.ui.home
 
 import android.content.Context
-import android.content.Intent
 import android.util.AttributeSet
 import android.widget.Button
-import android.widget.Toast
-import com.atakmap.android.ipc.AtakBroadcast
+import android.widget.ImageButton
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.ui.BaseTab
+import com.jonapoul.cotgenerator.plugin.utils.Toaster
 
 
 class HomeTab @JvmOverloads constructor(
@@ -16,31 +15,26 @@ class HomeTab @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     defStyleRes: Int = 0,
 ) : BaseTab(
-    layoutRes = R.layout.tab_home,
+    layoutRes = R.layout.home_tab,
     context,
     attrs,
     defStyleAttr,
     defStyleRes
 ) {
-    private val atakBroadcast = AtakBroadcast.getInstance()
-
     private lateinit var startStopButton: Button
-    private lateinit var settingsButton: Button
-
+    private lateinit var aboutButton: ImageButton
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         startStopButton = findViewById(R.id.start_stop_button)
-        settingsButton = findViewById(R.id.settings_button)
+        aboutButton = findViewById(R.id.about_button)
 
         startStopButton.setOnClickListener {
-            Toast.makeText(pluginContext, "TBC", Toast.LENGTH_SHORT).show()
+            Toaster.toast(pluginContext, "TBC")
         }
 
-        settingsButton.setOnClickListener {
-            atakBroadcast.sendBroadcast(
-                Intent("com.atakmap.app.ADVANCED_SETTINGS")
-            )
+        aboutButton.setOnClickListener {
+            AboutDialog(mapView.context, pluginContext).show()
         }
     }
 }
