@@ -3,10 +3,6 @@ package com.jonapoul.cotgenerator.plugin.prefs
 object Keys {
     private fun get(key: String) = "cotgenerator.${key}"
 
-    /* Status tab sorting settings */
-    val SORTING_TYPE = get("sorting_type")
-    val SORTING_ORDER = get("sorting_order")
-
     /* CoT settings */
     val USE_RANDOM_CALLSIGNS = get("use_random_callsigns")
     val BASE_CALLSIGN = get("base_callsign")

@@ -1,4 +1,4 @@
-package com.jonapoul.cotgenerator.plugin.ui.home
+package com.jonapoul.cotgenerator.plugin.ui
 
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException

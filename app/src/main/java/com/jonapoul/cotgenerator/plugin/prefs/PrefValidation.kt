@@ -1,4 +1,4 @@
-package com.jonapoul.cotgenerator.plugin.ui.settings
+package com.jonapoul.cotgenerator.plugin.prefs
 
 internal fun validateInt(str: String, min: Int? = null, max: Int? = null): Boolean {
     return try {

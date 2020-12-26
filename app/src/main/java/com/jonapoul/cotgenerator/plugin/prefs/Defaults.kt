@@ -2,14 +2,8 @@ package com.jonapoul.cotgenerator.plugin.prefs
 
 import com.jonapoul.cotgenerator.plugin.cot.CotRole
 import com.jonapoul.cotgenerator.plugin.cot.CotTeam
-import com.jonapoul.cotgenerator.plugin.ui.status.SortingOrder
-import com.jonapoul.cotgenerator.plugin.ui.status.SortingType
 
 object Defaults {
-    /* Status tab sorting settings */
-    val SORTING_TYPE = SortingType.CALLSIGN.ordinal
-    val SORTING_ORDER = SortingOrder.ASCENDING.ordinal
-
     /* CoT settings */
     const val USE_RANDOM_CALLSIGNS = true
     const val BASE_CALLSIGN = "GENERATED"

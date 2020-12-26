@@ -4,24 +4,9 @@
     <string name="app_name">CoT Generator</string>
     <string name="app_desc">Generates and transmits moving fake icons.</string>
 
-    <!-- Tabs -->
-    <string name="tab_home">Home</string>
-    <string name="tab_status">Status</string>
-    <string name="tab_settings">Settings</string>
-
     <!-- Home Tab -->
     <string name="home_button_start">Start</string>
     <string name="home_button_stop">Stop</string>
-
-    <!-- Status Tab -->
-    <string name="status_sort_by">Sort by:</string>
-    <string name="status_sort_type">Sort Type</string>
-    <string name="status_sort_order">Sort Order</string>
-
-    <!-- Settings Tab -->
-    <string name="settings_cot">Cursor On Target</string>
-    <string name="settings_location">Location</string>
-    <string name="settings_transmission">Transmission</string>
 
     <!-- About Dialog -->
     <string name="about_title">About</string>

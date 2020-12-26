@@ -46,9 +46,9 @@ buildscript {
 }
 
 dependencies {
-    implementation files('../libs/main.jar')
-    testImplementation files('../libs/main.jar')
-    androidTestImplementation files('../libs/main.jar')
+    compileOnly files('../libs/main.jar')
+    testCompileOnly files('../libs/main.jar')
+    androidTestCompileOnly files('../libs/main.jar')
 
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
     implementation "androidx.core:core-ktx:$versions.androidx_core"
@@ -126,6 +126,7 @@ android {
 
     defaultConfig {
         minSdkVersion versions.minSdk
+        buildConfigField "java.util.Date", "BUILD_TIMESTAMP", "new java.util.Date(" + System.currentTimeMillis() + "L)"
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86"
         }
@@ -226,9 +227,6 @@ android {
             dimension "application"
             manifestPlaceholders = [atakApiVersion: "com.atakmap.app@" + ATAK_VERSION + ".CIV"]
             buildConfigField 'String', 'ATAK_PACKAGE_NAME', '"com.atakmap.app.civ"'
-        }
-        applicationVariants.all { variant ->
-            variant.resValue "string", "versionName", variant.versionName
         }
     }
 

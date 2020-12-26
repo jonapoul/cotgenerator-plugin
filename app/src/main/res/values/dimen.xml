@@ -5,15 +5,7 @@
     <dimen name="font_size">14sp</dimen>
     <dimen name="smaller_font_size">12sp</dimen>
 
-    <dimen name="subheader_font_size">12sp</dimen>
-
-    <dimen name="status_row_image_size">25dp</dimen>
-    <dimen name="status_row_padding">4dp</dimen>
-    <dimen name="status_spinner_height">40dp</dimen>
-
-    <dimen name="footer_button_margin">8dp</dimen>
-    <dimen name="footer_image_size">32dp</dimen>
-    <dimen name="footer_image_padding">4dp</dimen>
+    <dimen name="home_button_row_height">48dp</dimen>
 
     <dimen name="about_row_margin_horizontal">16dp</dimen>
     <dimen name="about_row_margin_vertical">5dp</dimen>

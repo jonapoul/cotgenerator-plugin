@@ -8,7 +8,7 @@ import com.atakmap.android.ipc.AtakBroadcast.DocumentedIntentFilter
 import com.atakmap.android.maps.MapView
 import com.atakmap.app.preferences.ToolsPreferenceFragment
 import com.jonapoul.cotgenerator.plugin.R
-import com.jonapoul.cotgenerator.plugin.ui.settings.GeneratorPreferenceFragment
+import com.jonapoul.cotgenerator.plugin.prefs.GeneratorPreferenceFragment
 import com.jonapoul.cotgenerator.plugin.utils.Intents
 import timber.log.Timber
 

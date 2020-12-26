@@ -1,4 +1,4 @@
-package com.jonapoul.cotgenerator.plugin.ui.settings
+package com.jonapoul.cotgenerator.plugin.prefs
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,8 +9,6 @@ import android.preference.PreferenceManager
 import androidx.annotation.StringRes
 import com.atakmap.android.preference.PluginPreferenceFragment
 import com.jonapoul.cotgenerator.plugin.R
-import com.jonapoul.cotgenerator.plugin.prefs.Keys
-import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.utils.Toaster
 import com.jonapoul.sharedprefs.PrefPair
 import com.jonapoul.sharedprefs.getStringFromPair
