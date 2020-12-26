@@ -73,6 +73,11 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
         Prefs.UPDATE_FREQUENCY_PER_ICON to " seconds"
     )
 
+    override fun getSubTitle(): String = getSubTitle(
+        staticPluginContext!!.getString(R.string.preferences_parent),
+        staticPluginContext!!.getString(R.string.preferences_title)
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

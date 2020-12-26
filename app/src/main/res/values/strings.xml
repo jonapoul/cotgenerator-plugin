@@ -34,9 +34,11 @@
     <string name="about_no_compatible_apps">No compatible apps installed!</string>
 
     <!-- Preferences -->
+    <string name="preferences_parent">Tool Preferences</string>
     <string name="preferences_title">CoT Generator Preferences</string>
     <string name="preferences_summary">Adjust the generated output.</string>
     <string name="preferences_key">cotGeneratorPreferences</string>
+
     <string name="desc_use_random_callsigns">Use random callsigns?</string>
     <string name="summary_on_use_random_callsigns">All generated icons will have randomised callsigns.</string>
     <string name="summary_off_use_random_callsigns">All generated icons will have callsigns according to the two options below.</string>
