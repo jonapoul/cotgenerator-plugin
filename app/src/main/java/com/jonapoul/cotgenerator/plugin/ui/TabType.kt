@@ -1,11 +1,8 @@
 package com.jonapoul.cotgenerator.plugin.ui
 
 import android.content.Context
-import android.graphics.drawable.Drawable
-import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.jonapoul.cotgenerator.plugin.R
 
 internal enum class TabType(

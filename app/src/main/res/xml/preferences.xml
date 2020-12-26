@@ -1,45 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:key="key_for_category"
-        android:title="Test Preference Category (in Plugins they cannot have any members)" />
+    <PreferenceCategory android:title="Cursor On Target Settings" />
 
-    .
-    <!--    <com.atakmap.android.gui.PanEditTextPreference-->
-    <!--        pluginIcon="@drawable/abc"-->
-    <!--        android:defaultValue="0"-->
-    <!--        android:dialogTitle="Enter the time in jiffies"-->
-    <!--        android:inputType="number"-->
-    <!--        android:key="key_for_helloworld"-->
-    <!--        android:numeric="integer"-->
-    <!--        android:summary="Not sure what to say about it but if you want to use a summary defined in the strings.xml file you will needs to use the syntax @+string/ with the string identifier.   See the example bellow.   This unique syntax keeps issues from occuring where the string resource is looked up in the core application."-->
-    <!--        android:title="Some Textual Preference" />-->
+    <com.atakmap.android.gui.PanCheckBoxPreference
+        android:defaultValue="true"
+        android:key="cotgenerator.use_random_callsigns"
+        android:summaryOff="@string/summary_off_use_random_callsigns"
+        android:summaryOn="@string/summary_on_use_random_callsigns"
+        android:title="@string/desc_use_random_callsigns" />
 
-    <com.atakmap.android.gui.PanPreference
-        android:key="test_file_browser"
-        android:summary="Summary here"
-        android:title="Test File Browser" />
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="GENERATED"
+        android:key="cotgenerator.base_callsign"
+        android:title="@string/desc_base_callsign" />
 
+    <com.atakmap.android.gui.PanCheckBoxPreference
+        android:defaultValue="true"
+        android:key="cotgenerator.use_indexed_callsign"
+        android:summaryOff="@string/summary_off_use_indexed_callsigns"
+        android:summaryOn="@string/summary_on_use_indexed_callsigns"
+        android:title="@string/desc_use_indexed_callsigns" />
 
-    <com.atakmap.android.gui.PanPreference
-        android:key="test2"
-        android:summary="Summary here"
-        android:title="Title here" />
+    <com.atakmap.android.gui.PanCheckBoxPreference
+        android:defaultValue="true"
+        android:key="cotgenerator.use_random_team_colours"
+        android:summaryOff="@string/summary_off_use_random_team_colours"
+        android:summaryOn="@string/summary_on_use_random_team_colours"
+        android:title="@string/desc_use_random_team_colours" />
 
-    <Preference
-        android:key="nested_pref"
-        android:summary="Open a nested preference fragment."
-        android:title="Sub Preferences" />
+    <com.atakmap.android.gui.PanListPreference
+        android:defaultValue="Cyan"
+        android:entries="@array/team_colours"
+        android:entryValues="@array/team_colours"
+        android:key="cotgenerator.team_colour"
+        android:title="@string/desc_team_colour" />
 
-    <com.atakmap.android.gui.EncryptedPanEditTextPreference
-        android:name="Certificate Password"
-        android:defaultValue=""
-        android:inputType="textPassword"
-        android:key="myplugin.certificate_password"
-        android:summary="Enter in the certificate password if a client side certificate is in use."
-        android:title="Certificate Password" />
+    <com.atakmap.android.gui.PanCheckBoxPreference
+        android:defaultValue="true"
+        android:key="cotgenerator.use_random_roles"
+        android:summaryOff="@string/summary_off_use_random_roles"
+        android:summaryOn="@string/summary_on_use_random_roles"
+        android:title="@string/desc_use_random_roles" />
 
+    <com.atakmap.android.gui.PanListPreference
+        android:defaultValue="Team Member"
+        android:entries="@array/roles"
+        android:entryValues="@array/roles"
+        android:key="cotgenerator.role"
+        android:title="@string/desc_role" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="10"
+        android:inputType="number"
+        android:key="cotgenerator.icon_count"
+        android:title="@string/desc_icon_count" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="5"
+        android:inputType="number"
+        android:key="cotgenerator.stale_timer"
+        android:title="@string/desc_stale_timer" />
+
+    <PreferenceCategory android:title="Location Settings" />
+
+    <com.atakmap.android.gui.PanCheckBoxPreference
+        android:defaultValue="true"
+        android:key="cotgenerator.follow_self_marker"
+        android:summaryOff="@string/summary_off_follow_self_marker"
+        android:summaryOn="@string/summary_on_follow_self_marker"
+        android:title="@string/desc_follow_self_marker" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="51.238956"
+        android:inputType="number"
+        android:key="cotgenerator.centre_latitude"
+        android:title="@string/desc_centre_latitude" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="-0.672416"
+        android:inputType="number"
+        android:key="cotgenerator.centre_longitude"
+        android:title="@string/desc_centre_longitude" />
+
+    <com.atakmap.android.gui.PanCheckBoxPreference
+        android:defaultValue="true"
+        android:key="cotgenerator.stay_at_ground_level"
+        android:summaryOff="@string/summary_off_stay_at_ground_level"
+        android:summaryOn="@string/summary_on_stay_at_ground_level"
+        android:title="@string/desc_stay_at_ground_level" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="0"
+        android:inputType="number"
+        android:key="cotgenerator.centre_altitude"
+        android:title="@string/desc_centre_altitude" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="200"
+        android:inputType="number"
+        android:key="cotgenerator.radial_distribution"
+        android:title="@string/desc_radial_distribution" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="5"
+        android:inputType="number"
+        android:key="cotgenerator.movement_speed"
+        android:title="@string/desc_movement_speed" />
+
+    <PreferenceCategory android:title="Transmission Settings" />
+
+    <com.atakmap.android.gui.PanEditTextPreference
+        android:defaultValue="5"
+        android:inputType="number"
+        android:key="cotgenerator.update_frequency_per_icon"
+        android:title="@string/desc_update_drequency_per_icon" />
 
 </PreferenceScreen>
 
