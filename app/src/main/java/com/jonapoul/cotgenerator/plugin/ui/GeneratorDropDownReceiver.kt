@@ -50,7 +50,7 @@ class GeneratorDropDownReceiver(
         tabSpec.setIndicator(tabType.getLabel(pluginContext))
         tabHost.addTab(tabSpec)
 
-        val tab = rootView.findViewById<BaseTab>(R.id.tab_status)
+        val tab = rootView.findViewById<BaseTab>(tabType.viewId)
         tab.setMap(mapView)
     }
 }
