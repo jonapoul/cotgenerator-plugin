@@ -5,8 +5,9 @@ import android.content.Context
 import android.content.res.Configuration
 import com.atakmap.android.maps.MapComponent
 import com.atakmap.android.maps.MapView
-import com.atakmap.coremap.log.Log
+import com.jonapoul.cotgenerator.plugin.BuildConfig
 import com.jonapoul.cotgenerator.plugin.ui.GeneratorMapComponent
+import com.jonapoul.cotgenerator.plugin.utils.DebugTree
 import timber.log.Timber
 import transapps.maps.plugin.lifecycle.Lifecycle
 import java.util.*
@@ -16,6 +17,10 @@ class GeneratorLifecycle(private val pluginContext: Context) : Lifecycle {
     private lateinit var mapView: MapView
 
     override fun onCreate(activity: Activity?, mv: transapps.mapi.MapView?) {
+        if (BuildConfig.DEBUG && Timber.forest().isEmpty()) {
+            Timber.plant(DebugTree())
+        }
+
         Timber.i("onCreate")
         if (mv == null || mv.view !is MapView) {
             Timber.w("This plugin is only compatible with ATAK MapView")
