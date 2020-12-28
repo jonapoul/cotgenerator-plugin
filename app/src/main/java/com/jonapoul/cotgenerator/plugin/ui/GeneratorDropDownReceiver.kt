@@ -11,7 +11,7 @@ import com.atakmap.android.dropdown.DropDownReceiver
 import com.atakmap.android.maps.MapView
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.generation.RunningState
-import com.jonapoul.cotgenerator.plugin.generation.ThreadManager
+import com.jonapoul.cotgenerator.plugin.generation.GeneratorThreadManager
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.utils.Intents
 import com.jonapoul.sharedprefs.getBooleanFromPair
@@ -33,7 +33,7 @@ class GeneratorDropDownReceiver(
 
     private val prefs = PreferenceManager.getDefaultSharedPreferences(pluginContext)
 
-    private val threadManager = ThreadManager(prefs)
+    private val threadManager = GeneratorThreadManager.getInstance()
 
     private lateinit var startStopButton: Button
 
@@ -78,6 +78,7 @@ class GeneratorDropDownReceiver(
     private fun start() {
         Timber.i("start")
         threadManager.start(
+            prefs = prefs,
             mapView = mapView,
             callsigns = getCallsigns(),
         )

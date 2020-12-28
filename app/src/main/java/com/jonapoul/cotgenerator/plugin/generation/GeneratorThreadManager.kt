@@ -12,7 +12,7 @@ import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 
-class ThreadManager(private val prefs: SharedPreferences) {
+class GeneratorThreadManager private constructor() {
 
     private val lock = Any()
     private lateinit var runnable: GeneratorRunnable
@@ -26,7 +26,11 @@ class ThreadManager(private val prefs: SharedPreferences) {
         )
     }
 
-    fun start(mapView: MapView, callsigns: List<String>) {
+    fun start(
+        prefs: SharedPreferences,
+        mapView: MapView,
+        callsigns: List<String>
+    ) {
         synchronized(lock) {
             Timber.i("start")
             executor = Executors.newSingleThreadScheduledExecutor()
@@ -50,7 +54,11 @@ class ThreadManager(private val prefs: SharedPreferences) {
         }
     }
 
-    private companion object {
-        const val INITIAL_DELAY = 0L
+    companion object {
+        fun getInstance() = instance
+
+        private val instance = GeneratorThreadManager()
+
+        private const val INITIAL_DELAY = 0L
     }
 }
