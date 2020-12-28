@@ -12,20 +12,28 @@ internal class GeneratorRunnable(
     private val dispatcher: CotDispatcher
 ) : Runnable {
 
+    @Volatile private var isRunning = false
+
     override fun run() {
         try {
             Timber.i("Running")
+            isRunning = true
             val startNs = System.nanoTime()
             val cotEvents = factory.generate()
             val sleepTimePerDispatch = generationPeriodMs(startNs) / cotEvents.size
-            cotEvents.forEach {
-                dispatcher.dispatch(it)
+            for (event in cotEvents) {
+                if (!isRunning) break
+                dispatcher.dispatch(event)
                 bufferSleep(sleepTimePerDispatch)
             }
         } catch (e: Exception) {
             Timber.w(e)
         }
-        Timber.i("Finishing runnable!")
+        Timber.i("Finishing runnable")
+    }
+
+    fun stop() {
+        isRunning = false
     }
 
     private fun bufferSleep(bufferTimeMs: Long) {

@@ -49,6 +49,7 @@ class GeneratorThreadManager private constructor() {
     fun stop() {
         synchronized(lock) {
             Timber.i("stop")
+            runnable.stop()
             future?.cancel(true)
             executor.shutdownNow()
         }
