@@ -3,9 +3,9 @@ package com.jonapoul.cotgenerator.plugin.ui
 import android.content.Context
 import android.content.Intent
 import android.preference.PreferenceManager
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
-import androidx.core.content.ContextCompat
 import com.atak.plugins.impl.PluginLayoutInflater
 import com.atakmap.android.dropdown.DropDownReceiver
 import com.atakmap.android.maps.MapView
@@ -35,7 +35,8 @@ class GeneratorDropDownReceiver(
 
     private val threadManager = GeneratorThreadManager.getInstance()
 
-    private lateinit var startStopButton: Button
+    private lateinit var startButton: Button
+    private lateinit var stopButton: Button
 
     override fun onReceive(context: Context, intent: Intent?) {
         Timber.i("onReceive ${intent?.action}")
@@ -50,29 +51,15 @@ class GeneratorDropDownReceiver(
                 AboutDialog(mapView.context, pluginContext).show()
             }
 
-            startStopButton = rootView.findViewById(R.id.start_stop_button)
-            setStartStopButtonState()
-            startStopButton.setOnClickListener {
-                when (RunningState.getState()) {
-                    RunningState.RUNNING -> stop()
-                    RunningState.STOPPED -> start()
-                }
-            }
+            startButton = rootView.findViewById(R.id.start_button)
+            stopButton = rootView.findViewById(R.id.stop_button)
+            startButton.setOnClickListener { start() }
+            stopButton.setOnClickListener { stop() }
         }
     }
 
     override fun disposeImpl() {
         Timber.i("disposeImpl")
-    }
-
-    private fun setStartStopButtonState() {
-        val runningState = RunningState.getState()
-        Timber.i("setStartStopButtonState $runningState")
-        startStopButton.setText(runningState.textId)
-        val drawable = ContextCompat.getDrawable(pluginContext, runningState.drawableId)
-        startStopButton.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            drawable, null, null, null
-        )
     }
 
     private fun start() {
@@ -83,14 +70,27 @@ class GeneratorDropDownReceiver(
             callsigns = getCallsigns(),
         )
         RunningState.setState(RunningState.RUNNING)
-        setStartStopButtonState()
+        toggleButtonVisibility()
     }
 
     private fun stop() {
         Timber.i("stop")
         threadManager.stop()
         RunningState.setState(RunningState.STOPPED)
-        setStartStopButtonState()
+        toggleButtonVisibility()
+    }
+
+    private fun toggleButtonVisibility() {
+        when (RunningState.getState()) {
+            RunningState.RUNNING -> {
+                startButton.visibility = View.GONE
+                stopButton.visibility = View.VISIBLE
+            }
+            RunningState.STOPPED -> {
+                startButton.visibility = View.VISIBLE
+                stopButton.visibility = View.GONE
+            }
+        }
     }
 
     private fun getCallsigns(): List<String> {

@@ -3,10 +3,7 @@
     <item
         android:state_enabled="true"
         android:state_pressed="true"
-        android:drawable="@drawable/button_selected" />
+        android:drawable="@drawable/button_selected_stop" />
     <item
-        android:state_enabled="false"
-        android:drawable="@drawable/button_disabled" />
-    <item
-        android:drawable="@drawable/button_regular" />
+        android:drawable="@drawable/button_regular_stop" />
 </selector>

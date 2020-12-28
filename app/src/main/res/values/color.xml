@@ -8,4 +8,10 @@
     <color name="darker_grey">#121212</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+
+    <color name="start_light">#00BB00</color>
+    <color name="start_dark">#006600</color>
+
+    <color name="stopped_light">#BB0000</color>
+    <color name="stopped_dark">#660000</color>
 </resources>

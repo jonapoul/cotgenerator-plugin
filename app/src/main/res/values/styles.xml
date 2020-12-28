@@ -39,7 +39,7 @@
 
     <!-- ==== Style for ISRV Dark Buttons ==== -->
     <style name="darkButton" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/button_background_selector</item>
+        <item name="android:background">@drawable/button_selector_standard</item>
         <item name="android:shadowColor">@color/darker_grey</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
@@ -49,6 +49,14 @@
         <item name="android:paddingBottom">3dp</item>
         <item name="android:textSize">@dimen/font_size</item>
         <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="startButton" parent="darkButton">
+        <item name="android:background">@drawable/button_selector_start</item>
+    </style>
+
+    <style name="stopButton" parent="darkButton">
+        <item name="android:background">@drawable/button_selector_stop</item>
     </style>
 
     <style name="Theme.Transparent" parent="android:Theme">

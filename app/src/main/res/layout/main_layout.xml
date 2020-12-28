@@ -22,8 +22,8 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/start_stop_button"
-            style="@style/darkButton"
+            android:id="@+id/start_button"
+            style="@style/startButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -32,6 +32,19 @@
             android:drawableStart="@drawable/start"
             android:padding="10dp"
             android:text="@string/home_button_start" />
+
+        <Button
+            android:id="@+id/stop_button"
+            style="@style/stopButton"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/home_button_margin"
+            android:layout_weight="5"
+            android:drawableStart="@drawable/stop"
+            android:padding="10dp"
+            android:text="@string/home_button_stop" />
 
         <ImageButton
             android:id="@+id/about_button"
