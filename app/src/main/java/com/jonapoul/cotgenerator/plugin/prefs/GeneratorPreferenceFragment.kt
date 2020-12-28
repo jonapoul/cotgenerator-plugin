@@ -123,8 +123,8 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
         dependencies?.let { setPreferenceDependencyState(key, it) }
 
         val pref = preferenceSummaries.keys.firstOrNull { it.key == key }
-        val suffix = preferenceSummaries[pref]
-        if (suffix != null && pref != null) {
+        if (pref != null) {
+            val suffix = preferenceSummaries[pref]
             setSummary(pref, suffix)
         }
     }
@@ -135,11 +135,11 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
     }
 
     private fun setSummary(pref: PrefPair<String>, suffix: String?) {
-        Timber.i("setSummary ${pref.key} $suffix")
         findPreference(pref.key).also {
             val value = prefs.getStringFromPair(pref)
             val appended = if (suffix == null) "" else "$suffix"
             it.summary = "$value$appended"
+            Timber.i("setSummary ${pref.key} '$value$appended'")
         }
     }
 
