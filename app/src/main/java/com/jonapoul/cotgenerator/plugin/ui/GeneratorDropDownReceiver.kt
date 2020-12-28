@@ -31,7 +31,7 @@ class GeneratorDropDownReceiver(
         null
     )
 
-    private val prefs = PreferenceManager.getDefaultSharedPreferences(pluginContext)
+    private val prefs = PreferenceManager.getDefaultSharedPreferences(mapView.context)
 
     private val threadManager = GeneratorThreadManager.getInstance()
 
