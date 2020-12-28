@@ -4,6 +4,8 @@ import com.jonapoul.cotgenerator.plugin.cot.CotRole
 import com.jonapoul.cotgenerator.plugin.cot.CotTeam
 
 object Defaults {
+    const val DEVICE_UID = "DEVICE-UID"
+
     /* CoT settings */
     const val USE_RANDOM_CALLSIGNS = true
     const val BASE_CALLSIGN = "GENERATED"
