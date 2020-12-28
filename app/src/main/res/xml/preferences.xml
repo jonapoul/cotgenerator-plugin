@@ -20,7 +20,6 @@
         android:defaultValue="true"
         android:key="cotgenerator.use_indexed_callsign"
         android:summaryOff="@string/summary_off_use_indexed_callsigns"
-        android:summaryOn="@string/summary_on_use_indexed_callsigns"
         android:title="@string/desc_use_indexed_callsigns" />
 
     <com.atakmap.android.gui.PanCheckBoxPreference

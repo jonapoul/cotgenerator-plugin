@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.CheckBoxPreference
 import android.preference.Preference
 import android.preference.PreferenceManager
 import androidx.annotation.StringRes
+import com.atakmap.android.gui.PanCheckBoxPreference
 import com.atakmap.android.preference.PluginPreferenceFragment
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.ui.Toaster
@@ -91,6 +93,10 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
 
         /* Set summaries and suffixes of preferences */
         preferenceSummaries.forEach { setSummary(it.key, it.value) }
+
+        /* Display the configured base callsign in the explanation for the "use indexed callsigns"
+         * option */
+        injectBaseCallsignIntoIndexedCallsignSummary()
     }
 
     override fun onDestroy() {
@@ -127,6 +133,20 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
             val suffix = preferenceSummaries[pref]
             setSummary(pref, suffix)
         }
+
+        if (key == Keys.BASE_CALLSIGN) {
+            injectBaseCallsignIntoIndexedCallsignSummary()
+        }
+    }
+
+    private fun injectBaseCallsignIntoIndexedCallsignSummary() {
+        val indexedCallsignPref = findPreference(Keys.USE_INDEXED_CALLSIGN) as PanCheckBoxPreference
+        val baseCallsign = prefs.getStringFromPair(Prefs.BASE_CALLSIGN)
+        indexedCallsignPref.summaryOn = pluginContext.getString(
+            R.string.summary_on_use_indexed_callsigns,
+            baseCallsign,
+            baseCallsign
+        )
     }
 
     private fun setPreferenceDependencyState(parentKey: String, dependencyKeys: List<String>) {
