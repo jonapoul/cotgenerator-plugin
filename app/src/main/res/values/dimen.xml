@@ -6,6 +6,7 @@
     <dimen name="smaller_font_size">12sp</dimen>
 
     <dimen name="home_button_row_height">48dp</dimen>
+    <dimen name="home_button_margin">2dp</dimen>
 
     <dimen name="about_row_margin_horizontal">16dp</dimen>
     <dimen name="about_row_margin_vertical">5dp</dimen>
