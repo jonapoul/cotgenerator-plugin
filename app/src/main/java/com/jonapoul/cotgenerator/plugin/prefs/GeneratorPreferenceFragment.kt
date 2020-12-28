@@ -9,7 +9,7 @@ import android.preference.PreferenceManager
 import androidx.annotation.StringRes
 import com.atakmap.android.preference.PluginPreferenceFragment
 import com.jonapoul.cotgenerator.plugin.R
-import com.jonapoul.cotgenerator.plugin.utils.Toaster
+import com.jonapoul.cotgenerator.plugin.ui.Toaster
 import com.jonapoul.sharedprefs.PrefPair
 import com.jonapoul.sharedprefs.getStringFromPair
 import timber.log.Timber

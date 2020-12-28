@@ -1,4 +1,4 @@
-package com.jonapoul.cotgenerator.plugin.utils
+package com.jonapoul.cotgenerator.plugin.ui
 
 import android.content.Context
 import android.widget.Toast

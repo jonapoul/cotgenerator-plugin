@@ -15,7 +15,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.jonapoul.cotgenerator.plugin.BuildConfig
 import com.jonapoul.cotgenerator.plugin.R
-import com.jonapoul.cotgenerator.plugin.utils.Toaster
 import java.text.SimpleDateFormat
 import java.util.*
 
