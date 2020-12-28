@@ -6,3 +6,4 @@ gradle/
 keystore/*.keystore
 local.properties
 libs/*.jar
+TODO
