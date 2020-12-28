@@ -3,6 +3,8 @@ package com.jonapoul.cotgenerator.plugin.prefs
 import com.jonapoul.sharedprefs.PrefPair
 
 object Prefs {
+    val DEVICE_UID = PrefPair(Keys.DEVICE_UID, Defaults.DEVICE_UID)
+
     /* CoT settings */
     val USE_RANDOM_CALLSIGNS = PrefPair(Keys.USE_RANDOM_CALLSIGNS, Defaults.USE_RANDOM_CALLSIGNS)
     val BASE_CALLSIGN = PrefPair(Keys.BASE_CALLSIGN, Defaults.BASE_CALLSIGN)

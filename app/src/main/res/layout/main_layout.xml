@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_margin="@dimen/home_button_margin"
             android:layout_weight="5"
             android:drawableStart="@drawable/start"
             android:padding="10dp"
@@ -36,7 +36,7 @@
         <ImageButton
             android:id="@+id/about_button"
             style="@style/darkButton"
-            android:layout_margin="@dimen/footer_button_margin"
+            android:layout_margin="@dimen/home_button_margin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

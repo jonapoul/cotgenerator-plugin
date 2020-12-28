@@ -8,7 +8,7 @@ import com.jonapoul.sharedprefs.getStringFromPair
 import java.util.*
 
 @Suppress("SpellCheckingInspection")
-enum class CotTeam(val desc: String, val hex: String) {
+enum class CotTeam(private val desc: String, private val hex: String) {
     PURPLE("Purple", "FF800080"),
     MAGENTA("Magenta", "FFFF00FF"),
     MAROON("Maroon", "FF800000"),

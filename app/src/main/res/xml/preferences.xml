@@ -12,6 +12,7 @@
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="GENERATED"
+        android:dialogTitle="@string/desc_base_callsign"
         android:key="cotgenerator.base_callsign"
         android:title="@string/desc_base_callsign" />
 
@@ -52,12 +53,14 @@
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="10"
+        android:dialogTitle="@string/desc_icon_count"
         android:inputType="number"
         android:key="cotgenerator.icon_count"
         android:title="@string/desc_icon_count" />
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="5"
+        android:dialogTitle="@string/desc_stale_timer"
         android:inputType="number"
         android:key="cotgenerator.stale_timer"
         android:title="@string/desc_stale_timer" />
@@ -73,12 +76,14 @@
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="51.238956"
+        android:dialogTitle="@string/desc_centre_latitude"
         android:inputType="number"
         android:key="cotgenerator.centre_latitude"
         android:title="@string/desc_centre_latitude" />
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="-0.672416"
+        android:dialogTitle="@string/desc_centre_longitude"
         android:inputType="number"
         android:key="cotgenerator.centre_longitude"
         android:title="@string/desc_centre_longitude" />
@@ -92,18 +97,21 @@
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="0"
+        android:dialogTitle="@string/desc_centre_altitude"
         android:inputType="number"
         android:key="cotgenerator.centre_altitude"
         android:title="@string/desc_centre_altitude" />
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="200"
+        android:dialogTitle="@string/desc_radial_distribution"
         android:inputType="number"
         android:key="cotgenerator.radial_distribution"
         android:title="@string/desc_radial_distribution" />
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="5"
+        android:dialogTitle="@string/desc_movement_speed"
         android:inputType="number"
         android:key="cotgenerator.movement_speed"
         android:title="@string/desc_movement_speed" />
@@ -112,6 +120,7 @@
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="5"
+        android:dialogTitle="@string/desc_update_drequency_per_icon"
         android:inputType="number"
         android:key="cotgenerator.update_frequency_per_icon"
         android:title="@string/desc_update_drequency_per_icon" />

@@ -3,6 +3,8 @@ package com.jonapoul.cotgenerator.plugin.prefs
 object Keys {
     private fun get(key: String) = "cotgenerator.${key}"
 
+    const val DEVICE_UID = "bestDeviceUID" // set in LocationMapComponent::_determineBestDeviceUID
+
     /* CoT settings */
     val USE_RANDOM_CALLSIGNS = get("use_random_callsigns")
     val BASE_CALLSIGN = get("base_callsign")
