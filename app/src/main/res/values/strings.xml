@@ -56,7 +56,14 @@
     <string name="desc_update_period">Update period per icon</string>
 
     <!-- Preference Validation Rationales -->
-    <string name="rationale_base_callsign">Contains invalid characters!</string>
-
+    <string name="rationale_base_callsign">Contains invalid characters</string>
+    <string name="rationale_icon_count">Should be an integer between 1 and 10,000 inclusive</string>
+    <string name="rationale_stale_timer">Should be a positive integer</string>
+    <string name="rationale_latitude">Should be a number from -90 to +90</string>
+    <string name="rationale_longitude">Should be a number from 0 to 360</string>
+    <string name="rationale_altitude">Should be a positive number</string>
+    <string name="rationale_radial_distribution">Should be a positive number</string>
+    <string name="rationale_movement_speed">Should be a positive number</string>
+    <string name="rationale_update_period">Should be a positive number</string>
 </resources>
 

@@ -34,17 +34,21 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
 
     private lateinit var prefs: SharedPreferences
 
-    /* Small class to hold a) a preference's key, b) a function to verify its new value, and c) a
-     * string resource to display to the user when they enter an invalid value. */
-    private data class PrefValidation(
-        val key: String,
-        @StringRes val rationale: Int,
-        val isValid: (String) -> Boolean
-    )
+    /* Small class to hold a preference's key and a string resource to display to the user when
+     * they enter an invalid value. */
+    private class PrefValidation(val key: String, @StringRes val rationale: Int)
 
     /* Some preferences which require validation before we accept user input. */
     private val preferenceValidations = listOf(
-        PrefValidation(Keys.BASE_CALLSIGN, R.string.rationale_base_callsign, ::validateCallsign),
+        PrefValidation(Keys.BASE_CALLSIGN, R.string.rationale_base_callsign),
+        PrefValidation(Keys.ICON_COUNT, R.string.rationale_icon_count),
+        PrefValidation(Keys.STALE_TIMER, R.string.rationale_stale_timer),
+        PrefValidation(Keys.CENTRE_LATITUDE, R.string.rationale_latitude),
+        PrefValidation(Keys.CENTRE_LONGITUDE, R.string.rationale_longitude),
+        PrefValidation(Keys.CENTRE_ALTITUDE, R.string.rationale_altitude),
+        PrefValidation(Keys.RADIAL_DISTRIBUTION, R.string.rationale_radial_distribution),
+        PrefValidation(Keys.MOVEMENT_SPEED, R.string.rationale_movement_speed),
+        PrefValidation(Keys.UPDATE_PERIOD, R.string.rationale_update_period),
     )
 
     /* Some preferences which will trigger the disabling/re-enabling of other preferences. */
@@ -117,7 +121,20 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
             ?: throw IllegalArgumentException()
 
         /* Check whether newValue is valid */
-        val result = validation.isValid(newValue as String)
+        val str = newValue as String
+        val result = when (preference?.key) {
+            Keys.BASE_CALLSIGN -> validateCallsign(str)
+            Keys.ICON_COUNT -> validateInt(str, min = 1, max = 10_000)
+            Keys.STALE_TIMER -> validateInt(str, min = 1)
+            Keys.CENTRE_LATITUDE -> validateDouble(str, min = -90.0, max = 90.0)
+            Keys.CENTRE_LONGITUDE -> validateDouble(str, min = 0.0, max = 360.0)
+            Keys.CENTRE_ALTITUDE -> validateDouble(str, min = 0.0)
+            Keys.RADIAL_DISTRIBUTION -> validateDouble(str, min = 0.0)
+            Keys.MOVEMENT_SPEED -> validateDouble(str, min = 0.0)
+            Keys.UPDATE_PERIOD -> validateDouble(str, min = 0.0)
+            else -> throw IllegalArgumentException("No validation is done on ${preference?.key}!")
+        }
+
         if (!result) {
             /* It's invalid, so warn the user and reject the input */
             Toaster.toast(
