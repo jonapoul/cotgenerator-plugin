@@ -7,6 +7,8 @@ import com.atakmap.android.maps.Marker
 import com.atakmap.android.util.ATAKUtilities
 import com.atakmap.coremap.cot.event.CotEvent
 import com.atakmap.coremap.cot.event.CotPoint
+import com.atakmap.map.elevation.ElevationData
+import com.atakmap.map.elevation.ElevationManager
 import com.jonapoul.cotgenerator.plugin.generation.streams.DoubleRandomStream
 import com.jonapoul.cotgenerator.plugin.generation.streams.IRandomStream
 import com.jonapoul.cotgenerator.plugin.generation.streams.IntRandomStream
@@ -73,7 +75,7 @@ internal class CotEventFactory(
                 /* Initially place it on the distribution centre */
                 it.setPoint(
                     point = distributionCentre,
-                    altitude = initialiseAltitude(altitudeItr)
+                    altitude = initialiseAltitude(distributionCentre, altitudeItr)
                 )
                 /* Determine an initial offset to place each icon at a different location */
                 it.generateAndUpdateOffset(distanceItr, courseItr)
@@ -104,7 +106,7 @@ internal class CotEventFactory(
                 selfMarker = selfMarker,
                 newOffset = generateBoundedOffset(courseItr, it.getPoint()),
                 movementSpeed = movementSpeed,
-                newAltitude = updateAltitude(it.getPoint().hae)
+                newAltitude = updateAltitude(it.getPoint(), it.getPoint().hae)
             )
         }
         return getCotList()
@@ -200,26 +202,40 @@ internal class CotEventFactory(
         return data.map { it.event }
     }
 
-    private fun initialiseAltitude(altitudeIterator: IRandomStream<Double>): Double {
+    private fun initialiseAltitude(point: CotPoint, altitudeItr: IRandomStream<Double>): Double {
+        val elevationFromDted = getElevationOrZero(point)
         return if (stayAtGroundLevel) {
-            selfMarker.point.altitude
+            if (elevationFromDted == 0.0) {
+                /* No DTED to be found at this point, so use the self marker GPS altitude */
+                selfMarker.point.altitude
+            } else {
+                /* We have DTED, so pull elevation from there */
+                elevationFromDted
+            }
         } else {
             /* Block icons from going underground */
-            max(0.0, altitudeIterator.next())
+            max(elevationFromDted, altitudeItr.next())
         }
     }
 
-    private fun updateAltitude(altitude: Double): Double {
+    private fun updateAltitude(point: CotPoint, currentAltitude: Double): Double {
+        val elevationFromDted = getElevationOrZero(point)
         return if (stayAtGroundLevel) {
-            0.0
+            if (elevationFromDted == 0.0) {
+                /* No DTED to be found at this point, so use the self marker GPS altitude */
+                selfMarker.point.altitude
+            } else {
+                /* We have DTED, so pull elevation from there */
+                elevationFromDted
+            }
         } else {
             /* Direction is either -1, 0 or +1; representing falling, staying steady or
              * rising respectively */
             val direction = IntRandomStream(random, -1, 1).next()
-            var newAltitude = altitude + direction * movementSpeed
+            var newAltitude = currentAltitude + direction * movementSpeed
 
             /* Not going below ground */
-            newAltitude = max(newAltitude, 0.0)
+            newAltitude = max(newAltitude, elevationFromDted)
 
             /* Clip within the bounds of the distribution radius */
             newAltitude = max(newAltitude, centreAlt - distributionRadius)
@@ -230,7 +246,19 @@ internal class CotEventFactory(
         }
     }
 
+    private fun getElevationOrZero(point: CotPoint): Double {
+        val elevation = ElevationManager.getElevation(
+            point.lat,
+            point.lon,
+            ELEVATION_QUERY_PARAMETERS
+        )
+        return if (elevation.isNaN()) 0.0 else elevation
+    }
+
     private companion object {
         const val MAX_OFFSET_GENERATION_ATTEMPTS = 10
+        val ELEVATION_QUERY_PARAMETERS = ElevationManager.QueryParameters().also {
+            it.elevationModel = ElevationData.MODEL_TERRAIN
+        }
     }
 }
