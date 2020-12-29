@@ -10,8 +10,8 @@
         android:summaryOn="@string/summary_on_use_random_callsigns"
         android:title="@string/desc_use_random_callsigns" />
 
-    <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="GENERATED"
+    <com.jonapoul.cotgenerator.plugin.prefs.RefreshCallsignPreference
         android:dialogTitle="@string/desc_base_callsign"
         android:key="cotgenerator.base_callsign"
         android:title="@string/desc_base_callsign" />

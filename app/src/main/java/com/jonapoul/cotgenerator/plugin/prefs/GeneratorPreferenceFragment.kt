@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.CheckBoxPreference
 import android.preference.Preference
 import android.preference.PreferenceManager
 import androidx.annotation.StringRes
@@ -79,10 +78,17 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        /* Allow the custom preference to access plugin-specific resources when it inflates */
+        prefs = PreferenceManager.getDefaultSharedPreferences(staticAppContext)
+        RefreshCallsignPreference.setResources(
+            pluginContext = pluginContext,
+            appContext = staticAppContext!!
+        )
+
+        /* Inflate the preferences */
         super.onCreate(savedInstanceState)
 
-        /* Create our shared preferences and register for update callbacks */
-        prefs = PreferenceManager.getDefaultSharedPreferences(staticAppContext)
+        /* Register for update callbacks */
         prefs.registerOnSharedPreferenceChangeListener(this)
 
         /* Register to validate any user input in required fields */
