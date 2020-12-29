@@ -26,5 +26,5 @@ object Keys {
     val MOVEMENT_SPEED = get("movement_speed")
 
     /* Transmission settings */
-    val UPDATE_FREQUENCY_PER_ICON = get("update_frequency_per_icon")
+    val UPDATE_PERIOD = get("update_period")
 }

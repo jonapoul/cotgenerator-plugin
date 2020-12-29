@@ -26,5 +26,5 @@ object Prefs {
     val MOVEMENT_SPEED = PrefPair(Keys.MOVEMENT_SPEED, Defaults.MOVEMENT_SPEED)
 
     /* Transmission settings */
-    val UPDATE_FREQUENCY_PER_ICON = PrefPair(Keys.UPDATE_FREQUENCY_PER_ICON, Defaults.UPDATE_FREQUENCY_PER_ICON)
+    val UPDATE_PERIOD = PrefPair(Keys.UPDATE_PERIOD, Defaults.UPDATE_PERIOD)
 }

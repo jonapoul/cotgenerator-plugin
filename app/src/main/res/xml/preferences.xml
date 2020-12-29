@@ -10,8 +10,8 @@
         android:summaryOn="@string/summary_on_use_random_callsigns"
         android:title="@string/desc_use_random_callsigns" />
 
-        android:defaultValue="GENERATED"
     <com.jonapoul.cotgenerator.plugin.prefs.RefreshCallsignPreference
+        android:defaultValue="CALLSIGN"
         android:dialogTitle="@string/desc_base_callsign"
         android:key="cotgenerator.base_callsign"
         android:title="@string/desc_base_callsign" />
@@ -119,10 +119,10 @@
 
     <com.atakmap.android.gui.PanEditTextPreference
         android:defaultValue="5"
-        android:dialogTitle="@string/desc_update_drequency_per_icon"
+        android:dialogTitle="@string/desc_update_period"
         android:inputType="number"
-        android:key="cotgenerator.update_frequency_per_icon"
-        android:title="@string/desc_update_drequency_per_icon" />
+        android:key="cotgenerator.update_period"
+        android:title="@string/desc_update_period" />
 
 </PreferenceScreen>
 

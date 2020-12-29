@@ -8,7 +8,7 @@ object Defaults {
 
     /* CoT settings */
     const val USE_RANDOM_CALLSIGNS = true
-    const val BASE_CALLSIGN = "GENERATED"
+    const val BASE_CALLSIGN = "CALLSIGN"
     const val USE_INDEXED_CALLSIGN = true
     const val USE_RANDOM_TEAM_COLOURS = true
     val TEAM_COLOUR = CotTeam.CYAN.toString()
@@ -27,5 +27,5 @@ object Defaults {
     const val MOVEMENT_SPEED = "5"
 
     /* Transmission settings */
-    const val UPDATE_FREQUENCY_PER_ICON = "5"
+    const val UPDATE_PERIOD = "5"
 }

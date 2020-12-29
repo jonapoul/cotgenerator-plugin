@@ -69,7 +69,7 @@ class GeneratorPreferenceFragment : PluginPreferenceFragment,
         Prefs.CENTRE_ALTITUDE to " metres",
         Prefs.RADIAL_DISTRIBUTION to " metres",
         Prefs.MOVEMENT_SPEED to " m/s",
-        Prefs.UPDATE_FREQUENCY_PER_ICON to " seconds"
+        Prefs.UPDATE_PERIOD to " seconds"
     )
 
     override fun getSubTitle(): String = getSubTitle(

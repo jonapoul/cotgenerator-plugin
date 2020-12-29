@@ -53,7 +53,7 @@
     <string name="desc_centre_altitude">Centre altitude</string>
     <string name="desc_radial_distribution">Radial distribution</string>
     <string name="desc_movement_speed">Movement speed</string>
-    <string name="desc_update_drequency_per_icon">Update frequency per icon</string>
+    <string name="desc_update_period">Update period per icon</string>
 
     <!-- Preference Validation Rationales -->
     <string name="rationale_base_callsign">Contains invalid characters!</string>

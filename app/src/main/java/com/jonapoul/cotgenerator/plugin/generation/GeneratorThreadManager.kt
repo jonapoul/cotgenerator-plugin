@@ -35,7 +35,7 @@ class GeneratorThreadManager private constructor() {
             Timber.i("start")
             executor = Executors.newSingleThreadScheduledExecutor()
             val factory = CotEventFactory(mapView, prefs, callsigns)
-            val periodSeconds = prefs.parseIntFromPair(Prefs.UPDATE_FREQUENCY_PER_ICON).toLong()
+            val periodSeconds = prefs.parseIntFromPair(Prefs.UPDATE_PERIOD).toLong()
             runnable = GeneratorRunnable(prefs, factory, dispatcher)
             future = executor.scheduleAtFixedRate(
                 runnable,

@@ -46,7 +46,7 @@ internal class GeneratorRunnable(
 
     private fun generationPeriodMs(startNs: Long): Long {
         val generationTimeMs = (System.nanoTime() - startNs) / 1_000_000L
-        val updatePeriodMs = prefs.parseIntFromPair(Prefs.UPDATE_FREQUENCY_PER_ICON) * 1000L
+        val updatePeriodMs = prefs.parseIntFromPair(Prefs.UPDATE_PERIOD) * 1000L
         return updatePeriodMs - generationTimeMs
     }
 }

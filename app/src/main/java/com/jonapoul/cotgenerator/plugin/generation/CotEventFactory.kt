@@ -127,7 +127,7 @@ internal class CotEventFactory(
 
         /* Stop any fuckery with distribution radii */
         movementSpeed = min(movementSpeed, distributionRadius / 2.0)
-        travelDistance = movementSpeed * prefs.parseIntFromPair(Prefs.UPDATE_FREQUENCY_PER_ICON)
+        travelDistance = movementSpeed * prefs.parseIntFromPair(Prefs.UPDATE_PERIOD)
     }
 
     private fun updateDistributionCentre() {
