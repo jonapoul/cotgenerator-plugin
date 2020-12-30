@@ -1,0 +1,9 @@
+- generate in sphere, not cylinder
+- allow changing of input units in prefs?
+- colour picker preference
+- add ability to specify UDP or TCP?
+    - done by adding CotSendMethod argument to dispatch()
+- add a map widget to show running state and launch the ui
+    - maybe a coloured number to show how many?
+    - maybe a foreground notification too
+        - tap it to open the UI
