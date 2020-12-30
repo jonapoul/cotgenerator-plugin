@@ -3,7 +3,9 @@ package com.jonapoul.cotgenerator.plugin.prefs
 import com.jonapoul.sharedprefs.PrefPair
 
 object Prefs {
+    /* Set by ATAK itself */
     val DEVICE_UID = PrefPair(Keys.DEVICE_UID, Defaults.DEVICE_UID)
+    val COORDINATE_DISPLAY_FORMAT = PrefPair(Keys.COORDINATE_DISPLAY_FORMAT, Defaults.COORDINATE_DISPLAY_FORMAT)
 
     /* CoT settings */
     val USE_RANDOM_CALLSIGNS = PrefPair(Keys.USE_RANDOM_CALLSIGNS, Defaults.USE_RANDOM_CALLSIGNS)

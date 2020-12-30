@@ -68,4 +68,24 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="HomeSectionHeader">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">#dfb228</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="HomeSectionText" parent="HomeSectionHeader">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="HomeSectionTitle" parent="HomeSectionText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="HomeSectionCheckboxText" parent="HomeSectionText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

@@ -6,25 +6,37 @@ import androidx.core.content.res.ResourcesCompat
 import com.atakmap.android.dropdown.DropDownMapComponent
 import com.atakmap.android.ipc.AtakBroadcast.DocumentedIntentFilter
 import com.atakmap.android.maps.MapView
+import com.atakmap.android.toolbar.ToolManagerBroadcastReceiver
 import com.atakmap.app.preferences.ToolsPreferenceFragment
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.prefs.GeneratorPreferenceFragment
+import com.jonapoul.cotgenerator.plugin.tool.CentrePointPickerTool
 import com.jonapoul.cotgenerator.plugin.utils.Intents
 import timber.log.Timber
 
 
 class GeneratorMapComponent : DropDownMapComponent() {
 
+    private val toolManager = ToolManagerBroadcastReceiver.getInstance()
+
     override fun onCreate(pluginContext: Context, intent: Intent?, mapView: MapView) {
         Timber.i("onCreate")
         pluginContext.setTheme(R.style.ATAKPluginTheme)
         super.onCreate(pluginContext, intent, mapView)
 
+        /* Register our UI */
         registerDropDownReceiver(
             GeneratorDropDownReceiver(mapView, pluginContext),
             DocumentedIntentFilter(Intents.SHOW_DROP_DOWN_RECEIVER)
         )
 
+        /* Register the custom point picker tool */
+        toolManager.registerTool(
+            CentrePointPickerTool.TOOL_IDENTIFIER,
+            CentrePointPickerTool(mapView, pluginContext)
+        )
+
+        /* Register the preference fragment */
         ToolsPreferenceFragment.register(
             ToolsPreferenceFragment.ToolPreference(
                 pluginContext.getString(R.string.preferences_title),
@@ -41,5 +53,10 @@ class GeneratorMapComponent : DropDownMapComponent() {
                 )
             )
         )
+    }
+
+    override fun onDestroyImpl(context: Context?, view: MapView?) {
+        super.onDestroyImpl(context, view)
+        toolManager.unregisterTool(CentrePointPickerTool.TOOL_IDENTIFIER)
     }
 }

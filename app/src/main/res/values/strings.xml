@@ -4,9 +4,17 @@
     <string name="app_name">CoT Generator</string>
     <string name="app_desc">Generates and transmits moving fake icons.</string>
 
-    <!-- Home Tab -->
+    <!-- Home Screen -->
     <string name="home_button_start">Start</string>
     <string name="home_button_stop">Stop</string>
+    <string name="centre_point">Centre Point</string>
+    <string name="centre_point_latitude_title">Latitude:</string>
+    <string name="centre_point_longitude_title">Longitude:</string>
+    <string name="centre_point_altitude_title">Altitude:</string>
+    <string name="centre_point_degrees_placeholder">%1$.7f °</string>
+    <string name="centre_point_hae_metres_placeholder">%1$.2fm HAE</string>
+    <string name="centre_point_picker_prompt">Tap a centre point, or long press to enter coordinates</string>
+    <string name="centre_point_picker_error">The chosen point is invalid! Try again</string>
 
     <!-- About Dialog -->
     <string name="about_title">About</string>

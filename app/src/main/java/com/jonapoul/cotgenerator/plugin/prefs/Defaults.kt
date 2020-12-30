@@ -5,6 +5,7 @@ import com.jonapoul.cotgenerator.plugin.cot.CotTeam
 
 object Defaults {
     const val DEVICE_UID = "DEVICE-UID"
+    const val COORDINATE_DISPLAY_FORMAT = "MGRS"
 
     /* CoT settings */
     const val USE_RANDOM_CALLSIGNS = true

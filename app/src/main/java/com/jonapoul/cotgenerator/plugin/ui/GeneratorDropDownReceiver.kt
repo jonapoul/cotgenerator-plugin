@@ -10,8 +10,8 @@ import com.atak.plugins.impl.PluginLayoutInflater
 import com.atakmap.android.dropdown.DropDownReceiver
 import com.atakmap.android.maps.MapView
 import com.jonapoul.cotgenerator.plugin.R
-import com.jonapoul.cotgenerator.plugin.generation.RunningState
 import com.jonapoul.cotgenerator.plugin.generation.GeneratorThreadManager
+import com.jonapoul.cotgenerator.plugin.generation.RunningState
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.utils.Intents
 import com.jonapoul.sharedprefs.getBooleanFromPair
@@ -24,6 +24,10 @@ class GeneratorDropDownReceiver(
     mapView: MapView,
     private val pluginContext: Context,
 ) : DropDownReceiver(mapView) {
+
+    init {
+        HomeScreenView.setResources(mapView, pluginContext)
+    }
 
     private val rootView = PluginLayoutInflater.inflate(
         pluginContext,
