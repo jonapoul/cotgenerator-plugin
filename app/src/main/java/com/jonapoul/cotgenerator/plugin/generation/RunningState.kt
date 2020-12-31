@@ -1,30 +1,26 @@
 package com.jonapoul.cotgenerator.plugin.generation
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import com.jonapoul.cotgenerator.plugin.R
 import timber.log.Timber
 
-enum class RunningState(
-    @StringRes val textId: Int,
-    @DrawableRes val drawableId: Int
-) {
-    RUNNING(
-        R.string.home_button_stop,
-        R.drawable.stop
-    ),
-    STOPPED(
-        R.string.home_button_start,
-        R.drawable.start
-    );
+enum class RunningState(@DrawableRes val widgetDrawableId: Int) {
+    RUNNING(R.drawable.plugin_icon_green),
+    STOPPED(R.drawable.plugin_icon_red);
+
+    interface StateListener {
+        fun onRunningStateChanged(newState: RunningState)
+    }
 
     companion object {
         private var currentState = STOPPED
+        private val listeners = mutableSetOf<StateListener>()
 
         fun setState(runningState: RunningState) {
             synchronized(currentState) {
                 Timber.i("setState $runningState")
                 currentState = runningState
+                listeners.forEach { it.onRunningStateChanged(runningState) }
             }
         }
 
@@ -33,6 +29,14 @@ enum class RunningState(
                 Timber.i("getState $currentState")
                 return currentState
             }
+        }
+
+        fun addStateListener(listener: StateListener) {
+            listeners.add(listener)
+        }
+
+        fun removeListener(listener: StateListener) {
+            listeners.remove(listener)
         }
     }
 }
