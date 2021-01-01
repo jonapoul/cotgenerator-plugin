@@ -16,7 +16,7 @@ import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.ui.home.HomeScreenView
 import com.jonapoul.cotgenerator.plugin.utils.Intents
 import com.jonapoul.sharedprefs.getBooleanFromPair
-import com.jonapoul.sharedprefs.getStringFromPair
+import com.jonapoul.sharedprefs.getStringFromPairNoBlank
 import com.jonapoul.sharedprefs.parseIntFromPair
 import timber.log.Timber
 
@@ -113,7 +113,7 @@ class GeneratorDropDownReceiver(
             }
         } else {
             /* Use custom callsign as entered in the settings */
-            val baseCallsign = prefs.getStringFromPair(Prefs.BASE_CALLSIGN)
+            val baseCallsign = prefs.getStringFromPairNoBlank(Prefs.BASE_CALLSIGN)
             val useIndexedCallsigns = prefs.getBooleanFromPair(Prefs.USE_INDEXED_CALLSIGN)
             for (i in 0 until iconCount) {
                 val callsign = if (useIndexedCallsigns) "${baseCallsign}-${i}" else baseCallsign

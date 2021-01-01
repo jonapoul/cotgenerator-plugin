@@ -17,7 +17,7 @@ ext.versions = [
         fragment                : '1.2.5',
         lifecycle               : '2.2.0',
         recyclerview            : '1.1.0',
-        sharedprefs             : '1.0.2',
+        sharedprefs             : '1.0.3',
         timber                  : '4.7.1',
 
         // Testing
