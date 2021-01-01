@@ -35,9 +35,6 @@ internal class AboutDialog(
     )
 
     private val buildVersion = BuildConfig.VERSION_NAME
-    private val buildType = pluginContext.getString(
-        if (BuildConfig.DEBUG) R.string.about_debug else R.string.about_release
-    )
     private val buildTimestamp = SimpleDateFormat("HH:mm:ss dd MMM yyyy z", Locale.ENGLISH)
         .format(BuildConfig.BUILD_TIMESTAMP)
     private val githubRepository = "https://github.com/jonapoul/cotgenerator-plugin"
@@ -45,7 +42,6 @@ internal class AboutDialog(
     override fun show(): AlertDialog {
         val rows: List<Row> = listOf(
             Row(R.string.about_version, buildVersion),
-            Row(R.string.about_build_type, buildType),
             Row(R.string.about_build_time, buildTimestamp),
             Row(R.string.about_git_repo, githubRepository, R.drawable.go_to),
         )
