@@ -2,6 +2,7 @@ package com.jonapoul.cotgenerator.plugin.ui
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Button
@@ -24,10 +25,15 @@ import timber.log.Timber
 class GeneratorDropDownReceiver(
     mapView: MapView,
     private val pluginContext: Context,
-) : DropDownReceiver(mapView) {
+) : DropDownReceiver(mapView),
+    SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private val prefs: SharedPreferences
 
     init {
         HomeScreenView.setResources(mapView, pluginContext)
+        prefs = PreferenceManager.getDefaultSharedPreferences(mapView.context)
+        prefs.registerOnSharedPreferenceChangeListener(this)
     }
 
     private val rootView = PluginLayoutInflater.inflate(
@@ -35,8 +41,6 @@ class GeneratorDropDownReceiver(
         R.layout.main_layout,
         null
     )
-
-    private val prefs = PreferenceManager.getDefaultSharedPreferences(mapView.context)
 
     private val threadManager = GeneratorThreadManager.getInstance()
 
@@ -64,8 +68,18 @@ class GeneratorDropDownReceiver(
     }
 
     override fun disposeImpl() {
+        prefs.unregisterOnSharedPreferenceChangeListener(this)
         Timber.i("disposeImpl")
     }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+        if (isRunning()) {
+            stop()
+            start()
+        }
+    }
+
+    private fun isRunning() = RunningState.getState() == RunningState.RUNNING
 
     private fun start() {
         Timber.i("start")
