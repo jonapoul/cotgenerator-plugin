@@ -12,9 +12,16 @@
         app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.jonapoul.cotgenerator.plugin.ui.CentrePointView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.jonapoul.cotgenerator.plugin.ui.home.CentrePointView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
     </ScrollView>
 

@@ -13,6 +13,7 @@ import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.generation.GeneratorThreadManager
 import com.jonapoul.cotgenerator.plugin.generation.RunningState
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
+import com.jonapoul.cotgenerator.plugin.ui.home.HomeScreenView
 import com.jonapoul.cotgenerator.plugin.utils.Intents
 import com.jonapoul.sharedprefs.getBooleanFromPair
 import com.jonapoul.sharedprefs.getStringFromPair

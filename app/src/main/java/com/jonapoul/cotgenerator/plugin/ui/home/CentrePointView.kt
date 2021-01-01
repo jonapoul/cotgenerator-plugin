@@ -1,14 +1,17 @@
-package com.jonapoul.cotgenerator.plugin.ui
+package com.jonapoul.cotgenerator.plugin.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.AttributeSet
+import android.widget.Button
 import android.widget.CheckBox
-import android.widget.ImageButton
 import android.widget.TextView
 import com.atakmap.android.toolbar.ToolManagerBroadcastReceiver
 import com.atakmap.android.util.ATAKUtilities
+import com.atakmap.android.util.time.TimeListener
+import com.atakmap.android.util.time.TimeViewUpdater
 import com.atakmap.coremap.maps.coords.GeoPoint
+import com.atakmap.coremap.maps.time.CoordinatedTime
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.generation.Degrees
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
@@ -19,13 +22,14 @@ import com.jonapoul.sharedprefs.parseDoubleFromPair
 import timber.log.Timber
 
 
-internal class CentrePointView @JvmOverloads constructor(
+class CentrePointView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    defStyleRes: Int = 0,
 ) : HomeScreenView(context, attrs, defStyleAttr, defStyleRes),
-    SharedPreferences.OnSharedPreferenceChangeListener {
+    SharedPreferences.OnSharedPreferenceChangeListener,
+    TimeListener {
 
     init {
         inflate(pluginContext, R.layout.main_section_centre_point, this)
@@ -33,13 +37,15 @@ internal class CentrePointView @JvmOverloads constructor(
 
     private val toolManager = ToolManagerBroadcastReceiver.getInstance()
 
+    private val timeUpdater by lazy { TimeViewUpdater(mapView, REFRESH_INTERVAL_MS) }
+
     private lateinit var selectedPoint: GeoPoint
     private lateinit var selfPoint: GeoPoint
 
     private val latitudeView: TextView by lazy { findViewById(R.id.text_latitude) }
     private val longitudeView: TextView by lazy { findViewById(R.id.text_longitude) }
     private val altitudeView: TextView by lazy { findViewById(R.id.text_altitude) }
-    private val findCentreButton: ImageButton by lazy { findViewById(R.id.find_centre_button) }
+    private val findCentreButton: Button by lazy { findViewById(R.id.find_centre_button) }
     private val followSelfCheckbox: CheckBox by lazy { findViewById(R.id.follow_self_checkbox) }
 
     override fun onAttachedToWindow() {
@@ -51,8 +57,9 @@ internal class CentrePointView @JvmOverloads constructor(
         setFindCentreButtonState()
 
         prefs.registerOnSharedPreferenceChangeListener(this)
+        timeUpdater.register(this)
 
-        findViewById<ImageButton>(R.id.pan_to_centre_button).setOnClickListener {
+        findViewById<Button>(R.id.pan_to_centre_button).setOnClickListener {
             refreshSelectedPoint()
             refreshUiFields()
             mapView.mapController.panTo(selectedPoint, true)
@@ -73,6 +80,7 @@ internal class CentrePointView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         prefs.unregisterOnSharedPreferenceChangeListener(this)
+        timeUpdater.unregister(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -87,6 +95,12 @@ internal class CentrePointView @JvmOverloads constructor(
             refreshUiFields()
             setFindCentreButtonState()
         }
+    }
+
+    override fun onTimeChanged(oldTime: CoordinatedTime?, newTime: CoordinatedTime?) {
+        refreshSelfPoint()
+        refreshSelectedPoint()
+        refreshUiFields()
     }
 
     private fun getLatitude(): Degrees {
@@ -148,6 +162,8 @@ internal class CentrePointView @JvmOverloads constructor(
     }
 
     private companion object {
+        const val REFRESH_INTERVAL_MS = 1000L
+
         val CENTRE_POINT_PREFERENCES = listOf(
             Keys.CENTRE_LATITUDE,
             Keys.CENTRE_LONGITUDE,

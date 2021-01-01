@@ -1,4 +1,4 @@
-package com.jonapoul.cotgenerator.plugin.ui
+package com.jonapoul.cotgenerator.plugin.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.atakmap.android.maps.MapView
 
-internal abstract class HomeScreenView @JvmOverloads constructor(
+abstract class HomeScreenView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -31,9 +31,9 @@ internal abstract class HomeScreenView @JvmOverloads constructor(
         private var sp: SharedPreferences? = null
 
         fun setResources(mapView: MapView, pluginContext: Context) {
-            this.mv = mapView
-            this.pc = pluginContext
-            this.sp = PreferenceManager.getDefaultSharedPreferences(mapView.context)
+            mv = mapView
+            pc = pluginContext
+            sp = PreferenceManager.getDefaultSharedPreferences(mapView.context)
         }
     }
 }

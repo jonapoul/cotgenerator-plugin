@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,11 +9,39 @@
         style="@style/HomeSectionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/centre_point" />
+        android:text="@string/centre_point_section_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/desc_follow_self_marker" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/follow_self_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -102,44 +129,34 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/find_centre_button"
-            style="@style/darkButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/find_location"
-            tools:ignore="ContentDescription" />
-
-        <ImageButton
-            android:id="@+id/pan_to_centre_button"
-            style="@style/darkButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/pan_to"
-            tools:ignore="ContentDescription" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/desc_follow_self_marker"
-            style="@style/HomeSectionCheckboxText"
-            android:layout_weight="5" />
-
-        <CheckBox
-            android:id="@+id/follow_self_checkbox"
-            android:checked="false"
-            android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/find_centre_button"
+                style="@style/darkButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawableStart="@drawable/find_location"
+                android:text="@string/centre_point_picker_button"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:id="@+id/pan_to_centre_button"
+                style="@style/darkButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawableStart="@drawable/pan_to"
+                android:text="@string/centre_point_pan_button"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
