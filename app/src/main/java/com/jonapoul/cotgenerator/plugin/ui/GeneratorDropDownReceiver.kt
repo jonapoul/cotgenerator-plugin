@@ -48,8 +48,8 @@ class GeneratorDropDownReceiver(
         if (intent?.action == Intents.SHOW_DROP_DOWN_RECEIVER) {
             showDropDown(
                 rootView,
-                THREE_EIGHTHS_WIDTH, FULL_HEIGHT,
-                FULL_WIDTH, THIRD_HEIGHT
+                HALF_WIDTH, FULL_HEIGHT,
+                FULL_WIDTH, HALF_HEIGHT
             )
 
             rootView.findViewById<ImageButton>(R.id.about_button).setOnClickListener {
