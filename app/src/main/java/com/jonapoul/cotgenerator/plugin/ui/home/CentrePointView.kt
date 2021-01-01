@@ -28,12 +28,10 @@ class CentrePointView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     defStyleRes: Int = 0,
 ) : HomeScreenView(context, attrs, defStyleAttr, defStyleRes),
-    SharedPreferences.OnSharedPreferenceChangeListener,
     TimeListener {
 
-    init {
-        inflate(pluginContext, R.layout.main_section_centre_point, this)
-    }
+    override val layoutResource = R.layout.home_screen_centre_point
+    override val titleStringResource = R.string.centre_point_section_title
 
     private val toolManager = ToolManagerBroadcastReceiver.getInstance()
 
@@ -56,7 +54,6 @@ class CentrePointView @JvmOverloads constructor(
         refreshFollowSelfCheckbox()
         setFindCentreButtonState()
 
-        prefs.registerOnSharedPreferenceChangeListener(this)
         timeUpdater.register(this)
 
         findViewById<Button>(R.id.pan_to_centre_button).setOnClickListener {
@@ -79,7 +76,6 @@ class CentrePointView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        prefs.unregisterOnSharedPreferenceChangeListener(this)
         timeUpdater.unregister(this)
     }
 

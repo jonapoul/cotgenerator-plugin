@@ -8,6 +8,8 @@
     <dimen name="home_button_margin">2dp</dimen>
     <dimen name="home_button_padding">10dp</dimen>
     <dimen name="home_text_splitter_margin">4dp</dimen>
+    <dimen name="home_left_column_weight">1</dimen>
+    <dimen name="home_right_column_weight">1</dimen>
 
     <dimen name="about_row_margin_horizontal">16dp</dimen>
     <dimen name="about_row_margin_vertical">5dp</dimen>

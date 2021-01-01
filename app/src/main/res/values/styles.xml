@@ -71,11 +71,12 @@
     <style name="HomeSectionHeader">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">#dfb228</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="HomeSectionText" parent="HomeSectionHeader">
         <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="HomeSectionTitle" parent="HomeSectionText">
