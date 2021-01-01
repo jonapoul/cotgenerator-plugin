@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="@dimen/home_left_column_weight"
-            android:text="@string/desc_follow_self_marker" />
+            android:text="@string/centre_point_follow_self" />
 
         <LinearLayout
             android:layout_width="0dp"

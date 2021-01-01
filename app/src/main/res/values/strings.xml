@@ -11,6 +11,7 @@
     <string name="home_button_start">Start</string>
     <string name="home_button_stop">Stop</string>
     <string name="centre_point_section_title">Centre Point</string>
+    <string name="centre_point_follow_self">Follow Self?</string>
     <string name="centre_point_latitude_title">Lat:</string>
     <string name="centre_point_longitude_title">Lon:</string>
     <string name="centre_point_altitude_title">Alt:</string>
@@ -20,6 +21,10 @@
     <string name="centre_point_pan_button">Pan to…</string>
     <string name="centre_point_picker_prompt">Tap a centre point, or long press to enter coordinates</string>
     <string name="centre_point_picker_error">The chosen point is invalid! Try again</string>
+    <string name="callsign_section_title">Callsign</string>
+    <string name="callsign_use_random_title">Randomise?</string>
+    <string name="callsign_base_title">Base Callsign</string>
+    <string name="callsign_use_indexed_title">Indexed?</string>
 
     <!-- About Dialog -->
     <string name="about_title">About CoT Generator</string>
