@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/home_text_splitter_margin"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/callsign_use_random_title" />
 
         <CheckBox
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/home_text_splitter_margin"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/callsign_use_indexed_title" />
 
         <CheckBox

@@ -14,7 +14,7 @@
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/centre_point_follow_self" />
 
         <CheckBox
@@ -27,7 +27,7 @@
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="@string/centre_point_draw_circle" />
 
         <CheckBox
@@ -47,7 +47,7 @@
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="7"
             android:text="@string/centre_point_stay_ground_level" />
 
         <CheckBox
