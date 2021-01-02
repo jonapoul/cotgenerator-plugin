@@ -2,9 +2,11 @@ package com.jonapoul.cotgenerator.plugin.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.CheckBox
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import com.atakmap.android.gui.EditText
 import com.jonapoul.cotgenerator.plugin.R
@@ -29,6 +31,9 @@ class CallsignView @JvmOverloads constructor(
     private val indexedCheckbox: CheckBox by lazy { findViewById(R.id.callsign_use_indexed_checkbox) }
     private val baseCallsignEditText: EditText by lazy { findViewById(R.id.callsign_base_edit_text) }
     private val refreshCallsignButton: ImageButton by lazy { findViewById(R.id.callsign_refresh_button) }
+
+    private val baseCallsignTextView: TextView by lazy { findViewById(R.id.callsign_base_text_view) }
+    private val indexedTextView: TextView by lazy { findViewById(R.id.callsign_indexed_text_view) }
 
     private val atakCallsigns = pluginContext.resources.getStringArray(R.array.callsigns)
 
@@ -71,6 +76,10 @@ class CallsignView @JvmOverloads constructor(
         baseCallsignEditText.isEnabled = !useRandomCallsigns
         indexedCheckbox.isEnabled = !useRandomCallsigns
         refreshCallsignButton.isEnabled = !useRandomCallsigns
+
+        val colour = if (useRandomCallsigns) Color.GRAY else Color.WHITE
+        baseCallsignTextView.setTextColor(colour)
+        indexedTextView.setTextColor(colour)
     }
 
     private fun setViewsToMatchPreferences() {

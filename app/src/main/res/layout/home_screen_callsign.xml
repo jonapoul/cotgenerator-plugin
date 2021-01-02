@@ -25,6 +25,7 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/callsign_indexed_text_view"
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,11 +47,12 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/callsign_base_text_view"
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
             android:text="@string/callsign_base_title" />
 
         <com.atakmap.android.gui.EditText
