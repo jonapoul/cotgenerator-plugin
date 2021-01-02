@@ -14,11 +14,11 @@ import com.atakmap.coremap.maps.coords.GeoPoint
 import com.atakmap.coremap.maps.time.CoordinatedTime
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.generation.CentrePointFinder
+import com.jonapoul.cotgenerator.plugin.generation.DrawCircleRunnable
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.tool.CentrePointPickerTool
 import com.jonapoul.sharedprefs.getBooleanFromPair
-import com.jonapoul.sharedprefs.parseDoubleFromPair
 import timber.log.Timber
 
 
@@ -43,8 +43,9 @@ class CentrePointView @JvmOverloads constructor(
     private val latitudeView: TextView by lazy { findViewById(R.id.text_latitude) }
     private val longitudeView: TextView by lazy { findViewById(R.id.text_longitude) }
     private val altitudeView: TextView by lazy { findViewById(R.id.text_altitude) }
-    private val findCentreButton: Button by lazy { findViewById(R.id.find_centre_button) }
+    private val pickNewCentreButton: Button by lazy { findViewById(R.id.pick_new_centre_button) }
     private val followSelfCheckbox: CheckBox by lazy { findViewById(R.id.follow_self_checkbox) }
+    private val drawCircleCheckbox: CheckBox by lazy { findViewById(R.id.draw_circle_checkbox) }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -52,7 +53,11 @@ class CentrePointView @JvmOverloads constructor(
         refreshSelectedPoint()
         refreshUiFields()
         refreshFollowSelfCheckbox()
+        refreshDrawCircleCheckbox()
         setFindCentreButtonState()
+        runDrawCircleRunnable(
+            shouldDraw = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
+        )
 
         timeUpdater.register(this)
 
@@ -62,7 +67,7 @@ class CentrePointView @JvmOverloads constructor(
             mapView.mapController.panTo(selectedPoint, true)
         }
 
-        findCentreButton.setOnClickListener {
+        pickNewCentreButton.setOnClickListener {
             toolManager.startTool(
                 CentrePointPickerTool.TOOL_IDENTIFIER,
                 null
@@ -72,6 +77,16 @@ class CentrePointView @JvmOverloads constructor(
         followSelfCheckbox.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean(Keys.FOLLOW_SELF_MARKER, isChecked).apply()
         }
+
+        drawCircleCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean(Keys.DRAW_CIRCLE, isChecked).apply()
+            runDrawCircleRunnable(shouldDraw = isChecked)
+        }
+    }
+
+    private fun runDrawCircleRunnable(shouldDraw: Boolean) {
+        val mode = if (shouldDraw) DrawCircleRunnable.Mode.DRAW else DrawCircleRunnable.Mode.DELETE
+        DrawCircleRunnable(mapView, prefs, mode).run()
     }
 
     override fun onDetachedFromWindow() {
@@ -81,15 +96,21 @@ class CentrePointView @JvmOverloads constructor(
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         Timber.i("onSharedPreferenceChanged $key")
-        if (CENTRE_POINT_PREFERENCES.contains(key)) {
-            refreshSelectedPoint()
-            refreshUiFields()
-        } else if (key == Keys.FOLLOW_SELF_MARKER) {
-            refreshFollowSelfCheckbox()
-            refreshSelfPoint()
-            refreshSelectedPoint()
-            refreshUiFields()
-            setFindCentreButtonState()
+        when {
+            CENTRE_POINT_PREFERENCES.contains(key) -> {
+                refreshSelectedPoint()
+                refreshUiFields()
+            }
+            key == Keys.FOLLOW_SELF_MARKER -> {
+                refreshFollowSelfCheckbox()
+                refreshSelfPoint()
+                refreshSelectedPoint()
+                refreshUiFields()
+                setFindCentreButtonState()
+            }
+            key == Keys.DRAW_CIRCLE -> {
+                refreshDrawCircleCheckbox()
+            }
         }
     }
 
@@ -97,6 +118,9 @@ class CentrePointView @JvmOverloads constructor(
         refreshSelfPoint()
         refreshSelectedPoint()
         refreshUiFields()
+        runDrawCircleRunnable(
+            shouldDraw = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
+        )
     }
 
     private fun refreshSelectedPoint() {
@@ -128,9 +152,13 @@ class CentrePointView @JvmOverloads constructor(
         followSelfCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.FOLLOW_SELF_MARKER)
     }
 
+    private fun refreshDrawCircleCheckbox() {
+        drawCircleCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
+    }
+
     private fun setFindCentreButtonState() {
         /* Enable the button only if we aren't set to follow this device's GPS */
-        findCentreButton.isEnabled = !prefs.getBooleanFromPair(Prefs.FOLLOW_SELF_MARKER)
+        pickNewCentreButton.isEnabled = !prefs.getBooleanFromPair(Prefs.FOLLOW_SELF_MARKER)
     }
 
     private companion object {

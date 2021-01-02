@@ -35,6 +35,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/home_left_column_weight"
+            android:text="@string/centre_point_draw_circle" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/home_right_column_weight"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/draw_circle_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -64,7 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/home_text_splitter_margin"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     tools:text="12.34567°" />
 
             </LinearLayout>
@@ -90,7 +117,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/home_text_splitter_margin"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     tools:text="0.123456°" />
 
             </LinearLayout>
@@ -116,7 +143,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/home_text_splitter_margin"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     tools:text="12.345m HAE" />
 
             </LinearLayout>
@@ -130,7 +157,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/find_centre_button"
+                android:id="@+id/pick_new_centre_button"
                 style="@style/darkButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

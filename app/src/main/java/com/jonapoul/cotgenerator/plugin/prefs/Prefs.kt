@@ -19,6 +19,7 @@ object Prefs {
     val STALE_TIMER = PrefPair(Keys.STALE_TIMER, Defaults.STALE_TIMER)
 
     /* Location settings */
+    val DRAW_CIRCLE = PrefPair(Keys.DRAW_CIRCLE, Defaults.DRAW_CIRCLE)
     val FOLLOW_SELF_MARKER = PrefPair(Keys.FOLLOW_SELF_MARKER, Defaults.FOLLOW_SELF_MARKER)
     val CENTRE_LATITUDE = PrefPair(Keys.CENTRE_LATITUDE, Defaults.CENTRE_LATITUDE)
     val CENTRE_LONGITUDE = PrefPair(Keys.CENTRE_LONGITUDE, Defaults.CENTRE_LONGITUDE)

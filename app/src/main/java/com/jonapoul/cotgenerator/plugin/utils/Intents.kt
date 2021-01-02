@@ -5,5 +5,4 @@ object Intents {
     private const val BASE_INTENT = "com.jonapoul.cotgenerator.plugin"
 
     const val SHOW_DROP_DOWN_RECEIVER = "$BASE_INTENT.SHOW_DROP_DOWN_RECEIVER"
-    const val LAUNCH_SETTINGS = "$BASE_INTENT.LAUNCH_SETTINGS"
 }

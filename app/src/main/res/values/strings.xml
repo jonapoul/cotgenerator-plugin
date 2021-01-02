@@ -12,6 +12,7 @@
     <string name="home_button_stop">Stop</string>
     <string name="centre_point_section_title">Centre Point</string>
     <string name="centre_point_follow_self">Follow Self?</string>
+    <string name="centre_point_draw_circle">Draw Circle?</string>
     <string name="centre_point_latitude_title">Lat:</string>
     <string name="centre_point_longitude_title">Lon:</string>
     <string name="centre_point_altitude_title">Alt:</string>

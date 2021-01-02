@@ -9,7 +9,8 @@ import timber.log.Timber
 internal class GeneratorRunnable(
     private val prefs: SharedPreferences,
     private val factory: CotEventFactory,
-    private val dispatcher: CotDispatcher
+    private val dispatcher: CotDispatcher,
+    private val drawCircleRunnable: DrawCircleRunnable
 ) : Runnable {
 
     @Volatile private var isRunning = false
@@ -21,6 +22,7 @@ internal class GeneratorRunnable(
             val startNs = System.nanoTime()
             val cotEvents = factory.generate()
             val sleepTimePerDispatch = generationPeriodMs(startNs) / cotEvents.size
+            drawCircleRunnable.run()
             for (event in cotEvents) {
                 if (!isRunning) break
                 dispatcher.dispatch(event)

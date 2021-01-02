@@ -36,7 +36,17 @@ class GeneratorThreadManager private constructor() {
             executor = Executors.newSingleThreadScheduledExecutor()
             val factory = CotEventFactory(mapView, prefs, callsigns)
             val periodSeconds = prefs.parseIntFromPair(Prefs.UPDATE_PERIOD).toLong()
-            runnable = GeneratorRunnable(prefs, factory, dispatcher)
+
+            runnable = GeneratorRunnable(
+                prefs,
+                factory,
+                dispatcher,
+                DrawCircleRunnable(
+                    mapView,
+                    prefs,
+                    DrawCircleRunnable.Mode.DRAW
+                )
+            )
             future = executor.scheduleAtFixedRate(
                 runnable,
                 INITIAL_DELAY,
@@ -46,12 +56,13 @@ class GeneratorThreadManager private constructor() {
         }
     }
 
-    fun stop() {
+    fun stop(mapView: MapView, prefs: SharedPreferences) {
         synchronized(lock) {
             Timber.i("stop")
             runnable.stop()
             future?.cancel(true)
             executor.shutdownNow()
+            DrawCircleRunnable(mapView, prefs, DrawCircleRunnable.Mode.DELETE).run()
         }
     }
 

@@ -18,6 +18,7 @@ object Keys {
     val STALE_TIMER = get("stale_timer")
 
     /* Location settings */
+    val DRAW_CIRCLE = get("draw_circle")
     val FOLLOW_SELF_MARKER = get("follow_self_marker")
     val CENTRE_LATITUDE = get("centre_latitude")
     val CENTRE_LONGITUDE = get("centre_longitude")

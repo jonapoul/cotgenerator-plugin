@@ -16,7 +16,6 @@ import com.jonapoul.cotgenerator.plugin.BuildConfig
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.generation.RunningState
 import com.jonapoul.cotgenerator.plugin.utils.Intents
-import timber.log.Timber
 
 
 internal class GeneratorStatusWidget(
@@ -32,7 +31,6 @@ internal class GeneratorStatusWidget(
 
     init {
         name = pluginContext.getString(R.string.widget_name)
-        Timber.i("Name = $name")
         RunningState.addStateListener(this)
         addOnClickListener(this)
         bottomRightLayout.addWidget(this)

@@ -94,7 +94,7 @@ class GeneratorDropDownReceiver(
 
     private fun stop() {
         Timber.i("stop")
-        threadManager.stop()
+        threadManager.stop(mapView, prefs)
         RunningState.setState(RunningState.STOPPED)
         toggleButtonVisibility()
     }

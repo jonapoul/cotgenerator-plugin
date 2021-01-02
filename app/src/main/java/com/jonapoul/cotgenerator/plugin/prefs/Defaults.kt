@@ -19,6 +19,7 @@ object Defaults {
     const val STALE_TIMER = "5"
 
     /* Location settings */
+    const val DRAW_CIRCLE = false
     const val FOLLOW_SELF_MARKER = true
     const val CENTRE_LATITUDE = "51.238956"
     const val CENTRE_LONGITUDE = "-0.672416"
