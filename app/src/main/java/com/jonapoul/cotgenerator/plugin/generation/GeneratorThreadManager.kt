@@ -38,13 +38,10 @@ class GeneratorThreadManager private constructor() {
             val periodSeconds = prefs.parseIntFromPair(Prefs.UPDATE_PERIOD).toLong()
 
             runnable = GeneratorRunnable(
+                mapView,
                 prefs,
                 factory,
-                dispatcher,
-                DrawCircleRunnable(
-                    mapView,
-                    prefs
-                )
+                dispatcher
             )
             future = executor.scheduleAtFixedRate(
                 runnable,

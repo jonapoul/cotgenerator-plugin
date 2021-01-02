@@ -15,6 +15,7 @@ import com.atakmap.coremap.maps.time.CoordinatedTime
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.generation.CentrePointFinder
 import com.jonapoul.cotgenerator.plugin.generation.DrawCircleRunnable
+import com.jonapoul.cotgenerator.plugin.generation.RunningState
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.tool.CentrePointPickerTool
@@ -92,6 +93,11 @@ class CentrePointView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         timeUpdater.unregister(this)
+
+        if (RunningState.getState() == RunningState.STOPPED) {
+            /* Delete the circle if the generation isn't running when we close the screen */
+            runDrawCircleRunnable(shouldDraw = false)
+        }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

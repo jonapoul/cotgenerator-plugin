@@ -1,16 +1,17 @@
 package com.jonapoul.cotgenerator.plugin.generation
 
 import android.content.SharedPreferences
+import com.atakmap.android.maps.MapView
 import com.atakmap.comms.CotDispatcher
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.sharedprefs.parseIntFromPair
 import timber.log.Timber
 
 internal class GeneratorRunnable(
+    private val mapView: MapView,
     private val prefs: SharedPreferences,
     private val factory: CotEventFactory,
-    private val dispatcher: CotDispatcher,
-    private val drawCircleRunnable: DrawCircleRunnable
+    private val dispatcher: CotDispatcher
 ) : Runnable {
 
     @Volatile private var isRunning = false
@@ -22,7 +23,7 @@ internal class GeneratorRunnable(
             val startNs = System.nanoTime()
             val cotEvents = factory.generate()
             val sleepTimePerDispatch = generationPeriodMs(startNs) / cotEvents.size
-            drawCircleRunnable.run()
+            DrawCircleRunnable(mapView, prefs).run()
             for (event in cotEvents) {
                 if (!isRunning) break
                 dispatcher.dispatch(event)
