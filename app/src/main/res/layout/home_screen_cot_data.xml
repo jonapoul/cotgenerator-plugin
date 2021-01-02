@@ -135,4 +135,91 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
+            android:text="@string/cot_data_stale_timer" />
+
+        <TextView
+            android:id="@+id/cot_data_stale_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="10 min" />
+
+        <SeekBar
+            android:id="@+id/cot_data_stale_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:max="59" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
+            android:text="@string/cot_data_speed" />
+
+        <TextView
+            android:id="@+id/cot_data_speed_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="10 m/s" />
+
+        <SeekBar
+            android:id="@+id/cot_data_speed_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:max="9" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
+            android:text="@string/cot_data_period" />
+
+        <TextView
+            android:id="@+id/cot_data_period_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="10s" />
+
+        <SeekBar
+            android:id="@+id/cot_data_period_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:max="59" />
+
+    </LinearLayout>
+
 </LinearLayout>

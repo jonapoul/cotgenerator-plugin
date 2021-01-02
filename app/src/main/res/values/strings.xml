@@ -34,6 +34,9 @@
     <string name="cot_data_role">Role</string>
     <string name="cot_data_icon_count">Count</string>
     <string name="cot_data_radius">Radius</string>
+    <string name="cot_data_stale_timer">Stale</string>
+    <string name="cot_data_speed">Speed</string>
+    <string name="cot_data_period">Period</string>
 
     <!-- About Dialog -->
     <string name="about_title">About CoT Generator</string>

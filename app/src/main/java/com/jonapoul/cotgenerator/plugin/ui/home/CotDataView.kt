@@ -11,11 +11,10 @@ import com.atakmap.android.util.SimpleItemSelectedListener
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
+import com.jonapoul.sharedprefs.PrefPair
 import com.jonapoul.sharedprefs.getBooleanFromPair
 import com.jonapoul.sharedprefs.getStringFromPair
 import com.jonapoul.sharedprefs.parseIntFromPair
-import java.lang.NumberFormatException
-
 
 class CotDataView @JvmOverloads constructor(
     context: Context,
@@ -33,16 +32,23 @@ class CotDataView @JvmOverloads constructor(
     private val radiusSeekbar: SeekBar by lazy { findViewById(R.id.cot_data_radius_seek_bar) }
     private val radiusTextView: TextView by lazy { findViewById(R.id.cot_data_radius_text_view) }
 
+    private val staleSeekbar: SeekBar by lazy { findViewById(R.id.cot_data_stale_seek_bar) }
+    private val staleTextView: TextView by lazy { findViewById(R.id.cot_data_stale_text_view) }
+
+    private val speedSeekbar: SeekBar by lazy { findViewById(R.id.cot_data_speed_seek_bar) }
+    private val speedTextView: TextView by lazy { findViewById(R.id.cot_data_speed_text_view) }
+
+    private val periodSeekbar: SeekBar by lazy { findViewById(R.id.cot_data_period_seek_bar) }
+    private val periodTextView: TextView by lazy { findViewById(R.id.cot_data_period_text_view) }
+
     private val randomTeamCheckbox: CheckBox by lazy { findViewById(R.id.cot_data_team_use_random_checkbox) }
-    private val randomRoleCheckbox: CheckBox by lazy { findViewById(R.id.cot_data_role_use_random_checkbox) }
-
     private val teamSpinner: PluginSpinner by lazy { findViewById(R.id.cot_data_team_spinner) }
-    private val roleSpinner: PluginSpinner by lazy { findViewById(R.id.cot_data_role_spinner) }
-
     private val teamTextView: TextView by lazy { findViewById(R.id.cot_data_team_text_view) }
-    private val roleTextView: TextView by lazy { findViewById(R.id.cot_data_role_text_view) }
-
     private val allTeams by lazy { pluginContext.resources.getStringArray(R.array.teams) }
+
+    private val randomRoleCheckbox: CheckBox by lazy { findViewById(R.id.cot_data_role_use_random_checkbox) }
+    private val roleSpinner: PluginSpinner by lazy { findViewById(R.id.cot_data_role_spinner) }
+    private val roleTextView: TextView by lazy { findViewById(R.id.cot_data_role_text_view) }
     private val allRoles by lazy { pluginContext.resources.getStringArray(R.array.roles) }
 
     override fun onAttachedToWindow() {
@@ -60,21 +66,22 @@ class CotDataView @JvmOverloads constructor(
         setSpinnerListener(teamSpinner, allTeams, Keys.TEAM_COLOUR)
         setSpinnerListener(roleSpinner, allRoles, Keys.ROLE)
 
-        setIconCountTextValue()
-        setIconCountSeekbarValue()
-        setIconCountSeekbarListener()
-
-        setRadiusTextValue()
-        setRadiusSeekbarValue()
-        setRadiusSeekbarListener()
+        initialiseSeekBar(iconCountSeekbar, iconCountTextView, Prefs.ICON_COUNT, COUNT_TICKS, "", "k")
+        initialiseSeekBar(radiusSeekbar, radiusTextView, Prefs.RADIAL_DISTRIBUTION, RADIUS_TICKS, " m", " km")
+        initialiseSeekBar(staleSeekbar, staleTextView, Prefs.STALE_TIMER, STALE_TICKS, " min", " min")
+        initialiseSeekBar(speedSeekbar, speedTextView, Prefs.MOVEMENT_SPEED, SPEED_TICKS, " m/s", " km/s")
+        initialiseSeekBar(periodSeekbar, periodTextView, Prefs.UPDATE_PERIOD, PERIOD_TICKS, "s", "s")
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         when (key) {
             Keys.USE_RANDOM_TEAM_COLOURS -> refreshTeamEnabledState()
             Keys.USE_RANDOM_ROLES -> refreshRoleEnabledState()
-            Keys.ICON_COUNT -> setIconCountTextValue()
-            Keys.RADIAL_DISTRIBUTION -> setRadiusTextValue()
+            Keys.ICON_COUNT -> setSeekBarLabel(iconCountTextView, Prefs.ICON_COUNT, "", "k")
+            Keys.RADIAL_DISTRIBUTION -> setSeekBarLabel(radiusTextView, Prefs.RADIAL_DISTRIBUTION, " m", " km")
+            Keys.STALE_TIMER -> setSeekBarLabel(staleTextView, Prefs.STALE_TIMER, " min", " min")
+            Keys.MOVEMENT_SPEED -> setSeekBarLabel(speedTextView, Prefs.MOVEMENT_SPEED, " m/s", " km/s")
+            Keys.UPDATE_PERIOD -> setSeekBarLabel(periodTextView, Prefs.UPDATE_PERIOD, "s", "s")
         }
     }
 
@@ -126,57 +133,45 @@ class CotDataView @JvmOverloads constructor(
         setTextViewEnabled(roleTextView, !useRandomRoles)
     }
 
-    private fun setIconCountTextValue() {
-        val count = prefs.parseIntFromPair(Prefs.ICON_COUNT)
-        iconCountTextView.text = when {
-            count < 1000 -> count.toString()
-            else -> "${count / 1000}k"
+    private fun initialiseSeekBar(
+        seekBar: SeekBar,
+        textView: TextView,
+        pref: PrefPair<String>,
+        ticks: List<Int>,
+        regularSuffix: String,
+        thousandsSuffix: String,
+    ) {
+        setSeekBarLabel(textView, pref, regularSuffix, thousandsSuffix)
+        setSeekBarValue(seekBar, pref, ticks)
+        setSeekBarListener(seekBar, pref, ticks)
+    }
+
+    private fun setSeekBarLabel(
+        textView: TextView,
+        pref: PrefPair<String>,
+        regularSuffix: String,
+        thousandsSuffix: String,
+    ) {
+        val value = prefs.parseIntFromPair(pref)
+        textView.text = when {
+            value < 1000 -> "$value$regularSuffix"
+            else -> "${value / 1000}$thousandsSuffix"
         }
     }
 
-    private fun setIconCountSeekbarValue() {
-        try {
-            val iconCount = prefs.parseIntFromPair(Prefs.ICON_COUNT)
-            iconCountSeekbar.progress = ICON_COUNT_TICKS.indexOf(iconCount)
-        } catch (e: NumberFormatException) {
-            iconCountSeekbar.progress = 1
-        }
-    }
-
-    private fun setIconCountSeekbarListener() {
-        iconCountSeekbar.setOnSeekBarChangeListener(
-            object : SimpleOnSeekBarChangeListener() {
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    val count = ICON_COUNT_TICKS[progress]
-                    prefs.edit().putString(Keys.ICON_COUNT, count.toString()).apply()
-                }
-            }
-        )
-    }
-
-    private fun setRadiusTextValue() {
-        val radius = prefs.parseIntFromPair(Prefs.RADIAL_DISTRIBUTION)
-        radiusTextView.text = when {
-            radius < 1000 -> "$radius m"
-            else -> "${radius / 1000} km"
-        }
-    }
-
-    private fun setRadiusSeekbarValue() {
-        radiusSeekbar.progress = try {
-            val radius = prefs.parseIntFromPair(Prefs.RADIAL_DISTRIBUTION)
-            RADIUS_TICKS.indexOf(radius)
+    private fun setSeekBarValue(seekBar: SeekBar, pref: PrefPair<String>, ticks: List<Int>) {
+        seekBar.progress = try {
+            ticks.indexOf(prefs.parseIntFromPair(pref))
         } catch (e: NumberFormatException) {
             1
         }
     }
 
-    private fun setRadiusSeekbarListener() {
-        radiusSeekbar.setOnSeekBarChangeListener(
+    private fun setSeekBarListener(seekBar: SeekBar, pref: PrefPair<String>, ticks: List<Int>) {
+        seekBar.setOnSeekBarChangeListener(
             object : SimpleOnSeekBarChangeListener() {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    val radius = RADIUS_TICKS[progress]
-                    prefs.edit().putString(Keys.RADIAL_DISTRIBUTION, radius.toString()).apply()
+                    prefs.edit().putString(pref.key, ticks[progress].toString()).apply()
                 }
             }
         )
@@ -184,12 +179,14 @@ class CotDataView @JvmOverloads constructor(
 
     private abstract class SimpleOnSeekBarChangeListener : SeekBar.OnSeekBarChangeListener {
         override fun onStartTrackingTouch(seekBar: SeekBar?) { /* No-op */ }
-
         override fun onStopTrackingTouch(seekBar: SeekBar?) { /* No-op */ }
     }
 
     private companion object {
-        val ICON_COUNT_TICKS = listOf(1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
+        val COUNT_TICKS = listOf(1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
         val RADIUS_TICKS = listOf(1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000)
+        val STALE_TICKS = List(60) { it + 1 } // list from 1 to 60 minutes inclusive
+        val SPEED_TICKS = listOf(1, 2, 5, 10, 20, 50, 100, 200, 500, 1000)
+        val PERIOD_TICKS = List(60) { it + 1 } // list from 1 to 60 seconds inclusive
     }
 }
