@@ -43,6 +43,8 @@ This is an ATAK plugin to generate fake Cursor on Target data and send it out ov
 ![The end is nigh](img/1k.jpg) |
 
 ## Settings
+### Centre Point Settings
+![settings](img/settings_centre.jpg)
 | Option | Description |
 |--------|-------------|
 | Follow self? | Dots will be placed around your ATAK instance's location, and they will follow you around as you move. |
@@ -50,9 +52,19 @@ This is an ATAK plugin to generate fake Cursor on Target data and send it out ov
 | Ground level? | When enabled, all dots will be placed along the ground, which can be pulled from DTED. If disabled, icons can be placed floating in midair, as in one of the screenshots above. |
 | Pick new... | Tapping this button will prompt the user to select a centre-point, around which dots will be generated. This can be done quickly by tapping on the map, or long-pressing on the map to manually enter co-ordinates. |
 | Pan to... | This button will move the camera to point at the current centre-point, be that a self marker or a manually-picked point. |
+
+### Callsign Settings
+![settings](img/settings_callsign.jpg)
+| Option | Description |
+|--------|-------------|
 | Randomise callsign? | Dots will be randomly assigned callsigns from the list of ATAK defaults. |
 | Indexed callsign? | Dots will have an index placed after their callsign to differentiate them from the others. This is disabled when randomise is enabled. |
 | Base callsign | The callsign given to all dots. Press the refresh button to generate a new one, in case you're not feeling creative. |
+
+### CoT Data Settings
+![settings](img/settings_cotdata.jpg)
+| Option | Description |
+|--------|-------------|
 | Randomise teams? | Gives each dot a random team colour. |
 | Team | Gives each dot the same team colour. |
 | Randomise roles? | Gives each dot a random role and corresponding icon. |
