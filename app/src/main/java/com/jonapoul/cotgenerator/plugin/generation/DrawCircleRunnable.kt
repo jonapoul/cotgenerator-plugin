@@ -7,6 +7,7 @@ import com.atakmap.android.maps.MapItem
 import com.atakmap.android.maps.MapView
 import com.atakmap.coremap.maps.coords.GeoPointMetaData
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
+import com.jonapoul.sharedprefs.getBooleanFromPair
 import com.jonapoul.sharedprefs.parseDoubleFromPair
 import timber.log.Timber
 
@@ -14,10 +15,17 @@ import timber.log.Timber
 class DrawCircleRunnable(
     private val mapView: MapView,
     private val prefs: SharedPreferences,
-    private val mode: Mode,
+    private val mode: Mode = Mode.fromPrefs(prefs)
 ) : Runnable {
 
-    enum class Mode { DRAW, DELETE }
+    enum class Mode {
+        DRAW, DELETE;
+        companion object {
+            fun fromPrefs(prefs: SharedPreferences): Mode {
+                return if (prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)) DRAW else DELETE
+            }
+        }
+    }
 
     private val mapGroup = mapView.rootGroup.findMapGroup(SHAPE_GROUP)
 

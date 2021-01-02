@@ -43,8 +43,7 @@ class GeneratorThreadManager private constructor() {
                 dispatcher,
                 DrawCircleRunnable(
                     mapView,
-                    prefs,
-                    DrawCircleRunnable.Mode.DRAW
+                    prefs
                 )
             )
             future = executor.scheduleAtFixedRate(
