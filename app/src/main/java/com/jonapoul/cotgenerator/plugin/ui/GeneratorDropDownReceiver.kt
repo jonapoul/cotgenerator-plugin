@@ -75,7 +75,8 @@ class GeneratorDropDownReceiver(
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (isRunning() && KEYS_TO_TRIGGER_RESTART.contains(key)) {
+        if (KEYS_TO_TRIGGER_RESTART.contains(key) && isRunning()) {
+            Timber.i("Restarting after $key was changed!")
             stop()
             start()
         }
@@ -96,7 +97,7 @@ class GeneratorDropDownReceiver(
 
     private fun stop() {
         Timber.i("stop")
-        threadManager.stop(mapView, prefs)
+        threadManager.stop()
         RunningState.setState(RunningState.STOPPED)
         toggleButtonVisibility()
     }

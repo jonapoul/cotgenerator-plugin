@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit
 class GeneratorThreadManager private constructor() {
 
     private val lock = Any()
-    private lateinit var runnable: GeneratorRunnable
-    private lateinit var executor: ScheduledExecutorService
+    private var runnable: GeneratorRunnable? = null
+    private var executor: ScheduledExecutorService? = null
     private var future: ScheduledFuture<*>? = null
 
     private val dispatcher = CotDispatcher().also {
@@ -43,7 +43,7 @@ class GeneratorThreadManager private constructor() {
                 factory,
                 dispatcher
             )
-            future = executor.scheduleAtFixedRate(
+            future = executor?.scheduleAtFixedRate(
                 runnable,
                 INITIAL_DELAY,
                 periodSeconds,
@@ -52,13 +52,12 @@ class GeneratorThreadManager private constructor() {
         }
     }
 
-    fun stop(mapView: MapView, prefs: SharedPreferences) {
+    fun stop() {
         synchronized(lock) {
             Timber.i("stop")
-            runnable.stop()
+            runnable?.stop()
             future?.cancel(true)
-            executor.shutdownNow()
-            DrawCircleRunnable(mapView, prefs, DrawCircleRunnable.Mode.DELETE).run()
+            executor?.shutdownNow()
         }
     }
 

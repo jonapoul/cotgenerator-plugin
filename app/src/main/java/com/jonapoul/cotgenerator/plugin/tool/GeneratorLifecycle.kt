@@ -8,6 +8,7 @@ import android.preference.PreferenceManager
 import com.atakmap.android.maps.MapComponent
 import com.atakmap.android.maps.MapView
 import com.jonapoul.cotgenerator.plugin.BuildConfig
+import com.jonapoul.cotgenerator.plugin.generation.DrawCircleRunnable
 import com.jonapoul.cotgenerator.plugin.generation.GeneratorThreadManager
 import com.jonapoul.cotgenerator.plugin.generation.RunningState
 import com.jonapoul.cotgenerator.plugin.ui.GeneratorMapComponent
@@ -79,7 +80,8 @@ class GeneratorLifecycle(private val pluginContext: Context) : Lifecycle {
 
     private fun stopThreads() {
         /* Make sure any threads running in the background are cancelled */
-        threadManager.stop(mapView, prefs)
+        threadManager.stop()
+        DrawCircleRunnable(mapView, prefs, DrawCircleRunnable.Mode.DELETE).run()
         RunningState.setState(RunningState.STOPPED)
     }
 }
