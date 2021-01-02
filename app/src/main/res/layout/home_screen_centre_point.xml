@@ -14,48 +14,27 @@
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_left_column_weight"
+            android:layout_weight="1"
             android:text="@string/centre_point_follow_self" />
 
-        <LinearLayout
+        <CheckBox
+            android:id="@+id/follow_self_checkbox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_right_column_weight"
-            android:gravity="center">
-
-            <CheckBox
-                android:id="@+id/follow_self_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:layout_weight="1" />
 
         <TextView
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_left_column_weight"
+            android:layout_weight="1"
             android:text="@string/centre_point_draw_circle" />
 
-        <LinearLayout
+        <CheckBox
+            android:id="@+id/draw_circle_checkbox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_right_column_weight"
-            android:gravity="center">
-
-            <CheckBox
-                android:id="@+id/draw_circle_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -69,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="@dimen/home_left_column_weight"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -153,7 +132,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_right_column_weight"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <Button

@@ -15,88 +15,59 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/home_text_splitter_margin"
-            android:layout_weight="@dimen/home_left_column_weight"
+            android:layout_weight="1"
             android:text="@string/callsign_use_random_title" />
 
-        <LinearLayout
+        <CheckBox
+            android:id="@+id/callsign_use_random_checkbox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_right_column_weight"
-            android:gravity="center">
-
-            <CheckBox
-                android:id="@+id/callsign_use_random_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:layout_weight="1" />
 
         <TextView
             style="@style/HomeSectionCheckboxText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/home_text_splitter_margin"
-            android:layout_weight="@dimen/home_left_column_weight"
-            android:text="@string/callsign_base_title" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_right_column_weight"
-            android:orientation="horizontal">
-
-            <com.atakmap.android.gui.EditText
-                android:id="@+id/callsign_base_edit_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="textNoSuggestions"
-                tools:ignore="LabelFor,NestedWeights" />
-
-            <ImageButton
-                android:id="@+id/callsign_refresh_button"
-                style="@style/darkButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/refresh"
-                tools:ignore="ContentDescription" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/HomeSectionCheckboxText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/home_text_splitter_margin"
-            android:layout_weight="@dimen/home_left_column_weight"
+            android:layout_weight="1"
             android:text="@string/callsign_use_indexed_title" />
 
-        <LinearLayout
+        <CheckBox
+            android:id="@+id/callsign_use_indexed_checkbox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="@dimen/home_right_column_weight"
-            android:gravity="center">
+            android:layout_weight="1" />
 
-            <CheckBox
-                android:id="@+id/callsign_use_indexed_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:text="@string/callsign_base_title" />
+
+        <com.atakmap.android.gui.EditText
+            android:id="@+id/callsign_base_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="textNoSuggestions"
+            tools:ignore="LabelFor,NestedWeights" />
+
+        <ImageButton
+            android:id="@+id/callsign_refresh_button"
+            style="@style/darkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/refresh"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

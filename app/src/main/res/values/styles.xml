@@ -86,7 +86,7 @@
 
     <style name="HomeSectionCheckboxText" parent="HomeSectionText">
         <item name="android:textSize">12sp</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">end</item>
     </style>
 
 </resources>
