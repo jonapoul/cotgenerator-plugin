@@ -53,7 +53,6 @@ class CotDataView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        setValuesFromPreferences()
         refreshTeamEnabledState()
         refreshRoleEnabledState()
 
@@ -65,6 +64,8 @@ class CotDataView @JvmOverloads constructor(
 
         setSpinnerListener(teamSpinner, allTeams, Keys.TEAM_COLOUR)
         setSpinnerListener(roleSpinner, allRoles, Keys.ROLE)
+
+        setValuesFromPreferences()
 
         initialiseSeekBar(iconCountSeekbar, iconCountTextView, Prefs.ICON_COUNT, COUNT_TICKS, "", "k")
         initialiseSeekBar(radiusSeekbar, radiusTextView, Prefs.RADIAL_DISTRIBUTION, RADIUS_TICKS, " m", " km")
