@@ -13,7 +13,7 @@ import com.atakmap.android.util.time.TimeViewUpdater
 import com.atakmap.coremap.maps.coords.GeoPoint
 import com.atakmap.coremap.maps.time.CoordinatedTime
 import com.jonapoul.cotgenerator.plugin.R
-import com.jonapoul.cotgenerator.plugin.generation.Degrees
+import com.jonapoul.cotgenerator.plugin.generation.CentrePointFinder
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.tool.CentrePointPickerTool
@@ -99,32 +99,8 @@ class CentrePointView @JvmOverloads constructor(
         refreshUiFields()
     }
 
-    private fun getLatitude(): Degrees {
-        return if (prefs.getBooleanFromPair(Prefs.FOLLOW_SELF_MARKER)) {
-            selfPoint.latitude
-        } else {
-            prefs.parseDoubleFromPair(Prefs.CENTRE_LATITUDE)
-        }
-    }
-
-    private fun getLongitude(): Degrees {
-        return if (prefs.getBooleanFromPair(Prefs.FOLLOW_SELF_MARKER)) {
-            selfPoint.longitude
-        } else {
-            prefs.parseDoubleFromPair(Prefs.CENTRE_LONGITUDE)
-        }
-    }
-
-    private fun getAltitude(): Double {
-        return if (prefs.getBooleanFromPair(Prefs.FOLLOW_SELF_MARKER)) {
-            selfPoint.altitude
-        } else {
-            prefs.parseDoubleFromPair(Prefs.CENTRE_ALTITUDE)
-        }
-    }
-
     private fun refreshSelectedPoint() {
-        selectedPoint = GeoPoint(getLatitude(), getLongitude(), getAltitude())
+        selectedPoint = CentrePointFinder.get(mapView, prefs)
     }
 
     private fun refreshSelfPoint() {
