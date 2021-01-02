@@ -47,6 +47,7 @@ class CentrePointView @JvmOverloads constructor(
     private val pickNewCentreButton: Button by lazy { findViewById(R.id.pick_new_centre_button) }
     private val followSelfCheckbox: CheckBox by lazy { findViewById(R.id.follow_self_checkbox) }
     private val drawCircleCheckbox: CheckBox by lazy { findViewById(R.id.draw_circle_checkbox) }
+    private val groundLevelCheckbox: CheckBox by lazy { findViewById(R.id.ground_level_checkbox) }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -55,6 +56,7 @@ class CentrePointView @JvmOverloads constructor(
         refreshUiFields()
         refreshFollowSelfCheckbox()
         refreshDrawCircleCheckbox()
+        refreshGroundLevelCheckbox()
         setFindCentreButtonState()
         runDrawCircleRunnable(
             shouldDraw = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
@@ -82,6 +84,10 @@ class CentrePointView @JvmOverloads constructor(
         drawCircleCheckbox.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean(Keys.DRAW_CIRCLE, isChecked).apply()
             runDrawCircleRunnable(shouldDraw = isChecked)
+        }
+
+        groundLevelCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean(Keys.STAY_AT_GROUND_LEVEL, isChecked).apply()
         }
     }
 
@@ -160,6 +166,10 @@ class CentrePointView @JvmOverloads constructor(
 
     private fun refreshDrawCircleCheckbox() {
         drawCircleCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
+    }
+
+    private fun refreshGroundLevelCheckbox() {
+        groundLevelCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.STAY_AT_GROUND_LEVEL)
     }
 
     private fun setFindCentreButtonState() {
