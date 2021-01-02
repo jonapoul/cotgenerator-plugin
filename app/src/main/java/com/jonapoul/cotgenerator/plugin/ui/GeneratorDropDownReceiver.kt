@@ -36,12 +36,6 @@ class GeneratorDropDownReceiver(
         prefs.registerOnSharedPreferenceChangeListener(this)
     }
 
-    private val rootView = PluginLayoutInflater.inflate(
-        pluginContext,
-        R.layout.main_layout,
-        null
-    )
-
     private val threadManager = GeneratorThreadManager.getInstance()
 
     private lateinit var startButton: Button
@@ -50,6 +44,12 @@ class GeneratorDropDownReceiver(
     override fun onReceive(context: Context, intent: Intent?) {
         Timber.i("onReceive ${intent?.action}")
         if (intent?.action == Intents.SHOW_DROP_DOWN_RECEIVER) {
+            val rootView = PluginLayoutInflater.inflate(
+                pluginContext,
+                R.layout.main_layout,
+                null
+            )
+
             showDropDown(
                 rootView,
                 HALF_WIDTH, FULL_HEIGHT,
