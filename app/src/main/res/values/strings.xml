@@ -44,53 +44,5 @@
     <string name="about_build_time">Build Time</string>
     <string name="about_git_repo">GitHub Repository</string>
     <string name="about_no_compatible_apps">No compatible apps installed!</string>
-
-    <!-- Preferences -->
-    <string name="preferences_parent">Tool Preferences</string>
-    <string name="preferences_title">CoT Generator Preferences</string>
-    <string name="preferences_summary">Adjust the generated output.</string>
-    <string name="preferences_key">cotGeneratorPreferences</string>
-    <string name="refresh">Refresh</string>
-
-    <string name="desc_use_random_callsigns">Use random callsigns?</string>
-    <string name="summary_on_use_random_callsigns">All generated icons will have randomised callsigns.</string>
-    <string name="summary_off_use_random_callsigns">All generated icons will have callsigns according to the two options below.</string>
-    <string name="desc_base_callsign">Base callsign</string>
-    <string name="desc_use_indexed_callsigns">Use indexed callsigns?</string>
-    <string name="summary_on_use_indexed_callsigns">Callsigns will be as \'%1$s-1\', \'%2$s-2\'; with indices appended to the "base callsign" configured above.</string>
-    <string name="summary_off_use_indexed_callsigns">Every icon will take the "base callsign" as its identifier.</string>
-    <string name="desc_use_random_team_colours">Use random team colours?</string>
-    <string name="summary_on_use_random_team_colours">Every icon will take a random colour.</string>
-    <string name="summary_off_use_random_team_colours">Icons will all take the same colour, configured below.</string>
-    <string name="desc_team_colour">Team colour</string>
-    <string name="desc_use_random_roles">Use random roles?</string>
-    <string name="summary_on_use_random_roles">Every icon will take a random role.</string>
-    <string name="summary_off_use_random_roles">Icons will all take the same role, configured below.</string>
-    <string name="desc_role">Team role</string>
-    <string name="desc_icon_count">Icon count</string>
-    <string name="desc_stale_timer">Stale timer</string>
-    <string name="desc_follow_self_marker">Follow self marker?</string>
-    <string name="summary_on_follow_self_marker">Icons will be generated around your own marker on the map, and will follow you as you move.</string>
-    <string name="summary_off_follow_self_marker">Icons will be generated in the area surrounding the coordinates configured below.</string>
-    <string name="desc_centre_latitude">Centre latitude</string>
-    <string name="desc_centre_longitude">Centre longitude</string>
-    <string name="desc_stay_at_ground_level">Stay at ground level?</string>
-    <string name="summary_on_stay_at_ground_level">All icons will have an altitude of 0 MSL - or will pull from DTED if any exists.</string>
-    <string name="summary_off_stay_at_ground_level">Icons will be generated in a sphere around the altitude configured below.</string>
-    <string name="desc_centre_altitude">Centre altitude</string>
-    <string name="desc_radial_distribution">Radial distribution</string>
-    <string name="desc_movement_speed">Movement speed</string>
-    <string name="desc_update_period">Update period per icon</string>
-
-    <!-- Preference Validation Rationales -->
-    <string name="rationale_base_callsign">Contains invalid characters</string>
-    <string name="rationale_icon_count">Should be an integer between 1 and 10,000 inclusive</string>
-    <string name="rationale_stale_timer">Should be a positive integer</string>
-    <string name="rationale_latitude">Should be a number from -90 to +90</string>
-    <string name="rationale_longitude">Should be a number from 0 to 360</string>
-    <string name="rationale_altitude">Should be a positive number</string>
-    <string name="rationale_radial_distribution">Should be a positive number</string>
-    <string name="rationale_movement_speed">Should be a positive number</string>
-    <string name="rationale_update_period">Should be a positive number</string>
 </resources>
 
