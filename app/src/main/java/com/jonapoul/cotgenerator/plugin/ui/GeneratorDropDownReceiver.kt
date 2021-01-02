@@ -13,6 +13,7 @@ import com.atakmap.android.maps.MapView
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.generation.GeneratorThreadManager
 import com.jonapoul.cotgenerator.plugin.generation.RunningState
+import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.ui.home.HomeScreenView
 import com.jonapoul.cotgenerator.plugin.utils.Intents
@@ -73,7 +74,7 @@ class GeneratorDropDownReceiver(
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (isRunning()) {
+        if (isRunning() && KEYS_TO_TRIGGER_RESTART.contains(key)) {
             stop()
             start()
         }
@@ -135,5 +136,27 @@ class GeneratorDropDownReceiver(
             }
         }
         return callsigns
+    }
+
+    private companion object {
+        val KEYS_TO_TRIGGER_RESTART = listOf(
+            Keys.USE_RANDOM_CALLSIGNS,
+            Keys.BASE_CALLSIGN,
+            Keys.USE_INDEXED_CALLSIGN,
+            Keys.USE_RANDOM_TEAM_COLOURS,
+            Keys.TEAM_COLOUR,
+            Keys.USE_RANDOM_ROLES,
+            Keys.ROLE,
+            Keys.ICON_COUNT,
+            Keys.STALE_TIMER,
+            Keys.FOLLOW_SELF_MARKER,
+            Keys.CENTRE_LATITUDE,
+            Keys.CENTRE_LONGITUDE,
+            Keys.STAY_AT_GROUND_LEVEL,
+            Keys.CENTRE_ALTITUDE,
+            Keys.RADIAL_DISTRIBUTION,
+            Keys.MOVEMENT_SPEED,
+            Keys.UPDATE_PERIOD
+        )
     }
 }
