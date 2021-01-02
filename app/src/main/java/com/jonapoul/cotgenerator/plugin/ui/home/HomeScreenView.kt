@@ -64,11 +64,11 @@ abstract class HomeScreenView @JvmOverloads constructor(
             when (viewState) {
                 View.VISIBLE -> {
                     viewState = View.GONE
-                    toggleButton.setImageResource(R.drawable.arrow_up)
+                    toggleButton.setImageResource(R.drawable.arrow_down)
                 }
                 View.GONE -> {
                     viewState = View.VISIBLE
-                    toggleButton.setImageResource(R.drawable.arrow_down)
+                    toggleButton.setImageResource(R.drawable.arrow_up)
                 }
             }
             Timber.i("viewState after = $viewState")
