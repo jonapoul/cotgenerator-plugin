@@ -65,6 +65,7 @@ class GeneratorDropDownReceiver(
             stopButton = rootView.findViewById(R.id.stop_button)
             startButton.setOnClickListener { start() }
             stopButton.setOnClickListener { stop() }
+            toggleButtonVisibility()
         }
     }
 
