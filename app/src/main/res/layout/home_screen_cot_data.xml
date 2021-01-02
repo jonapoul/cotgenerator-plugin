@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="2"
+            android:text="@string/cot_data_team_use_random_title" />
+
+        <CheckBox
+            android:id="@+id/cot_data_team_use_random_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/cot_data_team_text_view"
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
+            android:text="@string/cot_data_team" />
+
+        <com.atakmap.android.gui.PluginSpinner
+            android:id="@+id/cot_data_team_spinner"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="2"
+            android:text="@string/cot_data_role_use_random_title" />
+
+        <CheckBox
+            android:id="@+id/cot_data_role_use_random_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/cot_data_role_text_view"
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
+            android:text="@string/cot_data_role" />
+
+        <com.atakmap.android.gui.PluginSpinner
+            android:id="@+id/cot_data_role_spinner"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
+            android:text="@string/cot_data_icon_count" />
+
+        <TextView
+            android:id="@+id/cot_data_icon_count_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="100" />
+
+        <SeekBar
+            android:id="@+id/cot_data_icon_count_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:max="12" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/HomeSectionCheckboxText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/home_text_splitter_margin"
+            android:layout_weight="1"
+            android:text="@string/cot_data_radius" />
+
+        <TextView
+            android:id="@+id/cot_data_radius_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="100 m" />
+
+        <SeekBar
+            android:id="@+id/cot_data_radius_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:max="18" />
+
+    </LinearLayout>
+
+</LinearLayout>

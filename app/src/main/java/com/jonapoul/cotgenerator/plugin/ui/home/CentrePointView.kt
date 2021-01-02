@@ -34,8 +34,6 @@ class CentrePointView @JvmOverloads constructor(
     override val layoutResource = R.layout.home_screen_centre_point
     override val titleStringResource = R.string.centre_point_section_title
 
-    private val toolManager = ToolManagerBroadcastReceiver.getInstance()
-
     private val timeUpdater by lazy { TimeViewUpdater(mapView, REFRESH_INTERVAL_MS) }
 
     private lateinit var selectedPoint: GeoPoint
@@ -71,7 +69,7 @@ class CentrePointView @JvmOverloads constructor(
         }
 
         pickNewCentreButton.setOnClickListener {
-            toolManager.startTool(
+            ToolManagerBroadcastReceiver.getInstance().startTool(
                 CentrePointPickerTool.TOOL_IDENTIFIER,
                 null
             )
@@ -108,21 +106,25 @@ class CentrePointView @JvmOverloads constructor(
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         Timber.i("onSharedPreferenceChanged $key")
-        when {
-            CENTRE_POINT_PREFERENCES.contains(key) -> {
-                refreshSelectedPoint()
-                refreshUiFields()
-            }
-            key == Keys.FOLLOW_SELF_MARKER -> {
+        if (CENTRE_POINT_PREFERENCES.contains(key)) {
+            refreshSelectedPoint()
+            refreshUiFields()
+        }
+        when (key) {
+            Keys.FOLLOW_SELF_MARKER -> {
                 refreshFollowSelfCheckbox()
                 refreshSelfPoint()
                 refreshSelectedPoint()
                 refreshUiFields()
                 setFindCentreButtonState()
+                runDrawCircleRunnable(
+                    shouldDraw = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
+                )
             }
-            key == Keys.DRAW_CIRCLE -> {
-                refreshDrawCircleCheckbox()
-            }
+            Keys.DRAW_CIRCLE -> refreshDrawCircleCheckbox()
+            Keys.RADIAL_DISTRIBUTION -> runDrawCircleRunnable(
+                shouldDraw = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
+            )
         }
     }
 

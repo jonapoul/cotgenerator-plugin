@@ -31,8 +31,8 @@
 
     <com.atakmap.android.gui.PanListPreference
         android:defaultValue="Cyan"
-        android:entries="@array/team_colours"
-        android:entryValues="@array/team_colours"
+        android:entries="@array/teams"
+        android:entryValues="@array/teams"
         android:key="cotgenerator.team_colour"
         android:title="@string/desc_team_colour" />
 

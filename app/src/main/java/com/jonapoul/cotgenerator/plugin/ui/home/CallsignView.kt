@@ -2,7 +2,6 @@ package com.jonapoul.cotgenerator.plugin.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.CheckBox
 import android.widget.ImageButton
@@ -77,9 +76,8 @@ class CallsignView @JvmOverloads constructor(
         indexedCheckbox.isEnabled = !useRandomCallsigns
         refreshCallsignButton.isEnabled = !useRandomCallsigns
 
-        val colour = if (useRandomCallsigns) Color.GRAY else Color.WHITE
-        baseCallsignTextView.setTextColor(colour)
-        indexedTextView.setTextColor(colour)
+        setTextViewEnabled(baseCallsignTextView, !useRandomCallsigns)
+        setTextViewEnabled(indexedTextView, !useRandomCallsigns)
     }
 
     private fun setViewsToMatchPreferences() {

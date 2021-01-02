@@ -13,6 +13,7 @@
     <string name="centre_point_section_title">Centre Point</string>
     <string name="centre_point_follow_self">Follow Self?</string>
     <string name="centre_point_draw_circle">Draw Circle?</string>
+    <string name="centre_point_stay_ground_level">Ground Level?</string>
     <string name="centre_point_latitude_title">Lat:</string>
     <string name="centre_point_longitude_title">Lon:</string>
     <string name="centre_point_altitude_title">Alt:</string>
@@ -26,6 +27,13 @@
     <string name="callsign_use_random_title">Randomise?</string>
     <string name="callsign_base_title">Base Callsign</string>
     <string name="callsign_use_indexed_title">Indexed?</string>
+    <string name="cot_data_section_title">CoT Data</string>
+    <string name="cot_data_team_use_random_title">Randomise Teams?</string>
+    <string name="cot_data_team">Team</string>
+    <string name="cot_data_role_use_random_title">Randomise Roles?</string>
+    <string name="cot_data_role">Role</string>
+    <string name="cot_data_icon_count">Count</string>
+    <string name="cot_data_radius">Radius</string>
 
     <!-- About Dialog -->
     <string name="about_title">About CoT Generator</string>

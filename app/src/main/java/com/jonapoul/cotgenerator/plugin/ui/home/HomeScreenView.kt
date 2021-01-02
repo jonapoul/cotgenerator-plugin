@@ -2,6 +2,7 @@ package com.jonapoul.cotgenerator.plugin.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.preference.PreferenceManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -79,6 +80,11 @@ abstract class HomeScreenView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         prefs.unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    protected fun setTextViewEnabled(textView: TextView, isEnabled: Boolean) {
+        val colour = if (isEnabled) Color.WHITE else Color.GRAY
+        textView.setTextColor(colour)
     }
 
     companion object {
