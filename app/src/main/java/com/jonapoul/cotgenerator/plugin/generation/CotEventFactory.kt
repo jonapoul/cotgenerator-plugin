@@ -148,7 +148,6 @@ internal class CotEventFactory(
         startPoint: CotPoint,
         attemptsRemaining: Int = MAX_OFFSET_GENERATION_ATTEMPTS,
     ): Offset {
-        Timber.i("generateBoundedOffset $attemptsRemaining")
         if (attemptsRemaining == 0) {
             /* The recursive algorithm has failed too many times, so to avoid a stack overflow we
              * just pick a random point along the radius of the centre-point and generate an Offset

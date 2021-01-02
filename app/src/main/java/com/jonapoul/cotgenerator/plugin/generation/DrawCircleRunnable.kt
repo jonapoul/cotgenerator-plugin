@@ -9,7 +9,6 @@ import com.atakmap.coremap.maps.coords.GeoPointMetaData
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.sharedprefs.getBooleanFromPair
 import com.jonapoul.sharedprefs.parseDoubleFromPair
-import timber.log.Timber
 
 
 class DrawCircleRunnable(
@@ -37,10 +36,8 @@ class DrawCircleRunnable(
     }
 
     private fun drawCircle() {
-        Timber.i("Showing")
         val foundItem: MapItem? = mapGroup.deepFindUID(CIRCLE_UID)
         val circleHasAlreadyBeenDrawn = foundItem is DrawingCircle
-        Timber.i("circleHasAlreadyBeenDrawn = $circleHasAlreadyBeenDrawn")
 
         val circle = if (circleHasAlreadyBeenDrawn) {
             /* Circle already exists on the map, so just grab it */
@@ -52,11 +49,10 @@ class DrawCircleRunnable(
                 it.strokeColor = drawingPrefs.shapeColor
                 it.fillColor = drawingPrefs.fillColor
                 it.strokeWeight = drawingPrefs.strokeWeight
-                it.radius = prefs.parseDoubleFromPair(Prefs.RADIAL_DISTRIBUTION)
             }
         }
 
-        Timber.i("Setting circle point")
+        circle.radius = prefs.parseDoubleFromPair(Prefs.RADIAL_DISTRIBUTION)
         circle.setCenterPoint(
             GeoPointMetaData.wrap(
                 CentrePointFinder.get(mapView, prefs)
@@ -65,13 +61,11 @@ class DrawCircleRunnable(
 
         if (!circleHasAlreadyBeenDrawn) {
             /* Draw it on the map */
-            Timber.i("Drawing circle")
             mapGroup.addItem(circle)
         }
     }
 
     private fun deleteCircle() {
-        Timber.i("Hiding")
         val foundItem: MapItem? = mapGroup.deepFindUID(CIRCLE_UID)
         if (foundItem is DrawingCircle) {
             /* If the item exists and it's a circle, delete it. Otherwise, do nothing */
