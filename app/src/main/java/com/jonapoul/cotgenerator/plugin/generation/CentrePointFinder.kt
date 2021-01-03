@@ -1,7 +1,6 @@
 package com.jonapoul.cotgenerator.plugin.generation
 
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import com.atakmap.android.maps.MapView
 import com.atakmap.android.util.ATAKUtilities
 import com.atakmap.coremap.maps.coords.GeoPoint
