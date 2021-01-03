@@ -20,6 +20,7 @@ import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.tool.CentrePointPickerTool
 import com.jonapoul.sharedprefs.getBooleanFromPair
+import com.jonapoul.sharedprefs.parseDoubleFromPair
 import timber.log.Timber
 
 
@@ -65,7 +66,11 @@ class CentrePointView @JvmOverloads constructor(
         findViewById<Button>(R.id.pan_to_centre_button).setOnClickListener {
             refreshSelectedPoint()
             refreshUiFields()
-            mapView.mapController.panTo(selectedPoint, true)
+
+            /* 0.025 seems to be the magic number to fit the circle on the screen just nicely - at
+             * least on my phone. This may be different on other devices, I've no idea. */
+            val scale = 0.025 / prefs.parseDoubleFromPair(Prefs.RADIAL_DISTRIBUTION)
+            mapView.mapController.panZoomTo(selectedPoint, scale, true)
         }
 
         pickNewCentreButton.setOnClickListener {

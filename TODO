@@ -8,4 +8,3 @@
 - store the hidden status of each section in preferences
 - add a question mark button to the home section header, which shows a dialog to explain each option
     - have to only make the arrow ImageButton clickable, instead of the whole header
-- when panning to position, also zoom to show the whole circle area
