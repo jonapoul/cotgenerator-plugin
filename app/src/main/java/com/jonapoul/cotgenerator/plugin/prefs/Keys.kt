@@ -20,15 +20,15 @@ object Keys {
     val BASE_CALLSIGN = get("base_callsign")
 
     /* CoT Data settings */
-    val USE_RANDOM_TEAM_COLOURS = get("use_random_team_colours")
-    val TEAM_COLOUR = get("team_colour")
+    val USE_RANDOM_TEAMS = get("use_random_team_colours")
+    val TEAM = get("team_colour")
     val USE_RANDOM_ROLES = get("use_random_roles")
     val ROLE = get("role")
-    val ICON_COUNT = get("icon_count")
+    val COUNT = get("icon_count")
     val STALE_TIMER = get("stale_timer")
-    val RADIAL_DISTRIBUTION = get("radial_distribution")
-    val MOVEMENT_SPEED = get("movement_speed")
-    val UPDATE_PERIOD = get("update_period")
+    val RADIUS = get("radial_distribution")
+    val SPEED = get("movement_speed")
+    val PERIOD = get("update_period")
 
     /* View visibility settings */
     val IS_VISIBLE_CENTRE_POINT = get("is_visible_centre_point")

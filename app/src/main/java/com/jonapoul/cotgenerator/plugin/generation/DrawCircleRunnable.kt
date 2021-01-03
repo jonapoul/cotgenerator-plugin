@@ -8,7 +8,7 @@ import com.atakmap.android.maps.MapView
 import com.atakmap.coremap.maps.coords.GeoPointMetaData
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.sharedprefs.getBooleanFromPair
-import com.jonapoul.sharedprefs.parseDoubleFromPair
+import com.jonapoul.sharedprefs.getIntFromPair
 
 
 class DrawCircleRunnable(
@@ -52,7 +52,7 @@ class DrawCircleRunnable(
             }
         }
 
-        circle.radius = prefs.parseDoubleFromPair(Prefs.RADIAL_DISTRIBUTION)
+        circle.radius = prefs.getIntFromPair(Prefs.RADIUS).toDouble()
         circle.setCenterPoint(
             GeoPointMetaData.wrap(
                 CentrePointFinder.get(mapView, prefs)

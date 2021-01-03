@@ -22,15 +22,15 @@ object Defaults {
     const val BASE_CALLSIGN = "CALLSIGN"
 
     /* CoT Data settings */
-    const val USE_RANDOM_TEAM_COLOURS = true
-    val TEAM_COLOUR = CotTeam.CYAN.toString()
+    const val USE_RANDOM_TEAMS = true
+    val TEAM = CotTeam.CYAN.toString()
     const val USE_RANDOM_ROLES = true
     val ROLE = CotRole.TEAM_MEMBER.toString()
-    const val ICON_COUNT = "10"
-    const val STALE_TIMER = "5"
-    const val RADIAL_DISTRIBUTION = "200"
-    const val MOVEMENT_SPEED = "5"
-    const val UPDATE_PERIOD = "5"
+    const val COUNT = 10
+    const val STALE_TIMER = 5
+    const val RADIUS = 200
+    const val SPEED = 5
+    const val PERIOD = 5
 
     /* View visibility settings */
     const val IS_VISIBLE_CENTRE_POINT = true

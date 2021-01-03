@@ -20,7 +20,7 @@ import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.tool.CentrePointPickerTool
 import com.jonapoul.sharedprefs.getBooleanFromPair
-import com.jonapoul.sharedprefs.parseDoubleFromPair
+import com.jonapoul.sharedprefs.getIntFromPair
 import timber.log.Timber
 
 
@@ -70,7 +70,7 @@ class CentrePointView @JvmOverloads constructor(
 
             /* 0.025 seems to be the magic number to fit the circle on the screen just nicely - at
              * least on my phone. This may be different on other devices, I've no idea. */
-            val scale = 0.025 / prefs.parseDoubleFromPair(Prefs.RADIAL_DISTRIBUTION)
+            val scale = 0.025 / prefs.getIntFromPair(Prefs.RADIUS).toDouble()
             mapView.mapController.panZoomTo(selectedPoint, scale, true)
         }
 
@@ -128,7 +128,7 @@ class CentrePointView @JvmOverloads constructor(
                 )
             }
             Keys.DRAW_CIRCLE -> refreshDrawCircleCheckbox()
-            Keys.RADIAL_DISTRIBUTION -> runDrawCircleRunnable(
+            Keys.RADIUS -> runDrawCircleRunnable(
                 shouldDraw = prefs.getBooleanFromPair(Prefs.DRAW_CIRCLE)
             )
         }

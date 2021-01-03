@@ -21,15 +21,15 @@ object Prefs {
     val BASE_CALLSIGN = PrefPair(Keys.BASE_CALLSIGN, Defaults.BASE_CALLSIGN)
 
     /* CoT Data settings */
-    val USE_RANDOM_TEAM_COLOURS = PrefPair(Keys.USE_RANDOM_TEAM_COLOURS, Defaults.USE_RANDOM_TEAM_COLOURS)
-    val TEAM_COLOUR = PrefPair(Keys.TEAM_COLOUR, Defaults.TEAM_COLOUR)
+    val USE_RANDOM_TEAMS = PrefPair(Keys.USE_RANDOM_TEAMS, Defaults.USE_RANDOM_TEAMS)
+    val TEAM = PrefPair(Keys.TEAM, Defaults.TEAM)
     val USE_RANDOM_ROLES = PrefPair(Keys.USE_RANDOM_ROLES, Defaults.USE_RANDOM_ROLES)
     val ROLE = PrefPair(Keys.ROLE, Defaults.ROLE)
-    val ICON_COUNT = PrefPair(Keys.ICON_COUNT, Defaults.ICON_COUNT)
+    val COUNT = PrefPair(Keys.COUNT, Defaults.COUNT)
     val STALE_TIMER = PrefPair(Keys.STALE_TIMER, Defaults.STALE_TIMER)
-    val RADIAL_DISTRIBUTION = PrefPair(Keys.RADIAL_DISTRIBUTION, Defaults.RADIAL_DISTRIBUTION)
-    val MOVEMENT_SPEED = PrefPair(Keys.MOVEMENT_SPEED, Defaults.MOVEMENT_SPEED)
-    val UPDATE_PERIOD = PrefPair(Keys.UPDATE_PERIOD, Defaults.UPDATE_PERIOD)
+    val RADIUS = PrefPair(Keys.RADIUS, Defaults.RADIUS)
+    val SPEED = PrefPair(Keys.SPEED, Defaults.SPEED)
+    val PERIOD = PrefPair(Keys.PERIOD, Defaults.PERIOD)
 
     /* View visibility settings */
     val IS_VISIBLE_CENTRE_POINT = PrefPair(Keys.IS_VISIBLE_CENTRE_POINT, Defaults.IS_VISIBLE_CENTRE_POINT)

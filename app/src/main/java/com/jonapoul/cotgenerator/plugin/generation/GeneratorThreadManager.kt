@@ -5,7 +5,7 @@ import com.atakmap.android.maps.MapView
 import com.atakmap.comms.CotDispatcher
 import com.atakmap.comms.DispatchFlags
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
-import com.jonapoul.sharedprefs.parseIntFromPair
+import com.jonapoul.sharedprefs.getIntFromPair
 import timber.log.Timber
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
@@ -35,7 +35,7 @@ class GeneratorThreadManager private constructor() {
             Timber.i("start")
             executor = Executors.newSingleThreadScheduledExecutor()
             val factory = CotEventFactory(mapView, prefs, callsigns)
-            val periodSeconds = prefs.parseIntFromPair(Prefs.UPDATE_PERIOD).toLong()
+            val periodSeconds = prefs.getIntFromPair(Prefs.PERIOD).toLong()
 
             runnable = GeneratorRunnable(
                 mapView,

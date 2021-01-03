@@ -11,10 +11,7 @@ import com.atakmap.android.util.SimpleItemSelectedListener
 import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
-import com.jonapoul.sharedprefs.PrefPair
-import com.jonapoul.sharedprefs.getBooleanFromPair
-import com.jonapoul.sharedprefs.getStringFromPair
-import com.jonapoul.sharedprefs.parseIntFromPair
+import com.jonapoul.sharedprefs.*
 
 class CotDataView @JvmOverloads constructor(
     context: Context,
@@ -57,33 +54,33 @@ class CotDataView @JvmOverloads constructor(
         refreshTeamEnabledState()
         refreshRoleEnabledState()
 
-        setCheckBoxListener(randomTeamCheckbox, Keys.USE_RANDOM_TEAM_COLOURS)
+        setCheckBoxListener(randomTeamCheckbox, Keys.USE_RANDOM_TEAMS)
         setCheckBoxListener(randomRoleCheckbox, Keys.USE_RANDOM_ROLES)
 
         setSpinnerAdapter(teamSpinner, R.array.teams)
         setSpinnerAdapter(roleSpinner, R.array.roles)
 
-        setSpinnerListener(teamSpinner, allTeams, Keys.TEAM_COLOUR)
+        setSpinnerListener(teamSpinner, allTeams, Keys.TEAM)
         setSpinnerListener(roleSpinner, allRoles, Keys.ROLE)
 
         setValuesFromPreferences()
 
-        initialiseSeekBar(iconCountSeekbar, iconCountTextView, Prefs.ICON_COUNT, COUNT_TICKS, "", "k")
-        initialiseSeekBar(radiusSeekbar, radiusTextView, Prefs.RADIAL_DISTRIBUTION, RADIUS_TICKS, " m", " km")
+        initialiseSeekBar(iconCountSeekbar, iconCountTextView, Prefs.COUNT, COUNT_TICKS, "", "k")
+        initialiseSeekBar(radiusSeekbar, radiusTextView, Prefs.RADIUS, RADIUS_TICKS, " m", " km")
         initialiseSeekBar(staleSeekbar, staleTextView, Prefs.STALE_TIMER, STALE_TICKS, " min", " min")
-        initialiseSeekBar(speedSeekbar, speedTextView, Prefs.MOVEMENT_SPEED, SPEED_TICKS, " m/s", " km/s")
-        initialiseSeekBar(periodSeekbar, periodTextView, Prefs.UPDATE_PERIOD, PERIOD_TICKS, "s", "s")
+        initialiseSeekBar(speedSeekbar, speedTextView, Prefs.SPEED, SPEED_TICKS, " m/s", " km/s")
+        initialiseSeekBar(periodSeekbar, periodTextView, Prefs.PERIOD, PERIOD_TICKS, "s", "s")
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         when (key) {
-            Keys.USE_RANDOM_TEAM_COLOURS -> refreshTeamEnabledState()
+            Keys.USE_RANDOM_TEAMS -> refreshTeamEnabledState()
             Keys.USE_RANDOM_ROLES -> refreshRoleEnabledState()
-            Keys.ICON_COUNT -> setSeekBarLabel(iconCountTextView, Prefs.ICON_COUNT, "", "k")
-            Keys.RADIAL_DISTRIBUTION -> setSeekBarLabel(radiusTextView, Prefs.RADIAL_DISTRIBUTION, " m", " km")
+            Keys.COUNT -> setSeekBarLabel(iconCountTextView, Prefs.COUNT, "", "k")
+            Keys.RADIUS -> setSeekBarLabel(radiusTextView, Prefs.RADIUS, " m", " km")
             Keys.STALE_TIMER -> setSeekBarLabel(staleTextView, Prefs.STALE_TIMER, " min", " min")
-            Keys.MOVEMENT_SPEED -> setSeekBarLabel(speedTextView, Prefs.MOVEMENT_SPEED, " m/s", " km/s")
-            Keys.UPDATE_PERIOD -> setSeekBarLabel(periodTextView, Prefs.UPDATE_PERIOD, "s", "s")
+            Keys.SPEED -> setSeekBarLabel(speedTextView, Prefs.SPEED, " m/s", " km/s")
+            Keys.PERIOD -> setSeekBarLabel(periodTextView, Prefs.PERIOD, "s", "s")
         }
     }
 
@@ -112,11 +109,11 @@ class CotDataView @JvmOverloads constructor(
     }
 
     private fun setValuesFromPreferences() {
-        randomTeamCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.USE_RANDOM_TEAM_COLOURS)
+        randomTeamCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.USE_RANDOM_TEAMS)
         randomRoleCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.USE_RANDOM_ROLES)
 
         teamSpinner.setSelection(
-            allTeams.indexOf(prefs.getStringFromPair(Prefs.TEAM_COLOUR))
+            allTeams.indexOf(prefs.getStringFromPair(Prefs.TEAM))
         )
         roleSpinner.setSelection(
             allRoles.indexOf(prefs.getStringFromPair(Prefs.ROLE))
@@ -124,7 +121,7 @@ class CotDataView @JvmOverloads constructor(
     }
 
     private fun refreshTeamEnabledState() {
-        val useRandomTeams = prefs.getBooleanFromPair(Prefs.USE_RANDOM_TEAM_COLOURS)
+        val useRandomTeams = prefs.getBooleanFromPair(Prefs.USE_RANDOM_TEAMS)
         teamSpinner.isEnabled = !useRandomTeams
         setTextViewEnabled(teamTextView, !useRandomTeams)
     }
@@ -138,7 +135,7 @@ class CotDataView @JvmOverloads constructor(
     private fun initialiseSeekBar(
         seekBar: SeekBar,
         textView: TextView,
-        pref: PrefPair<String>,
+        pref: PrefPair<Int>,
         ticks: List<Int>,
         regularSuffix: String,
         thousandsSuffix: String,
@@ -150,30 +147,30 @@ class CotDataView @JvmOverloads constructor(
 
     private fun setSeekBarLabel(
         textView: TextView,
-        pref: PrefPair<String>,
+        pref: PrefPair<Int>,
         regularSuffix: String,
         thousandsSuffix: String,
     ) {
-        val value = prefs.parseIntFromPair(pref)
+        val value = prefs.getIntFromPair(pref)
         textView.text = when {
             value < 1000 -> "$value$regularSuffix"
             else -> "${value / 1000}$thousandsSuffix"
         }
     }
 
-    private fun setSeekBarValue(seekBar: SeekBar, pref: PrefPair<String>, ticks: List<Int>) {
+    private fun setSeekBarValue(seekBar: SeekBar, pref: PrefPair<Int>, ticks: List<Int>) {
         seekBar.progress = try {
-            ticks.indexOf(prefs.parseIntFromPair(pref))
+            ticks.indexOf(prefs.getIntFromPair(pref))
         } catch (e: NumberFormatException) {
             1
         }
     }
 
-    private fun setSeekBarListener(seekBar: SeekBar, pref: PrefPair<String>, ticks: List<Int>) {
+    private fun setSeekBarListener(seekBar: SeekBar, pref: PrefPair<Int>, ticks: List<Int>) {
         seekBar.setOnSeekBarChangeListener(
             object : SimpleOnSeekBarChangeListener() {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    prefs.edit().putString(pref.key, ticks[progress].toString()).apply()
+                    prefs.edit().putInt(pref.key, ticks[progress]).apply()
                 }
             }
         )

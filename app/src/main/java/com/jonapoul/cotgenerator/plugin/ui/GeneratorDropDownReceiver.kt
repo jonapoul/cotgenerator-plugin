@@ -18,8 +18,8 @@ import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.cotgenerator.plugin.ui.home.HomeScreenView
 import com.jonapoul.cotgenerator.plugin.utils.Intents
 import com.jonapoul.sharedprefs.getBooleanFromPair
+import com.jonapoul.sharedprefs.getIntFromPair
 import com.jonapoul.sharedprefs.getStringFromPairNoBlank
-import com.jonapoul.sharedprefs.parseIntFromPair
 import timber.log.Timber
 
 
@@ -118,7 +118,7 @@ class GeneratorDropDownReceiver(
     private fun getCallsigns(): List<String> {
         val callsigns: MutableList<String> = ArrayList()
         val useRandomCallsigns = prefs.getBooleanFromPair(Prefs.USE_RANDOM_CALLSIGNS)
-        val iconCount = prefs.parseIntFromPair(Prefs.ICON_COUNT)
+        val iconCount = prefs.getIntFromPair(Prefs.COUNT)
         if (useRandomCallsigns) {
             /* Grab the list of all valid callsigns and shuffle it into a random order */
             val resources = pluginContext.resources
@@ -145,20 +145,20 @@ class GeneratorDropDownReceiver(
             Keys.USE_RANDOM_CALLSIGNS,
             Keys.BASE_CALLSIGN,
             Keys.USE_INDEXED_CALLSIGN,
-            Keys.USE_RANDOM_TEAM_COLOURS,
-            Keys.TEAM_COLOUR,
+            Keys.USE_RANDOM_TEAMS,
+            Keys.TEAM,
             Keys.USE_RANDOM_ROLES,
             Keys.ROLE,
-            Keys.ICON_COUNT,
+            Keys.COUNT,
             Keys.STALE_TIMER,
             Keys.FOLLOW_SELF_MARKER,
             Keys.CENTRE_LATITUDE,
             Keys.CENTRE_LONGITUDE,
             Keys.STAY_AT_GROUND_LEVEL,
             Keys.CENTRE_ALTITUDE,
-            Keys.RADIAL_DISTRIBUTION,
-            Keys.MOVEMENT_SPEED,
-            Keys.UPDATE_PERIOD
+            Keys.RADIUS,
+            Keys.SPEED,
+            Keys.PERIOD
         )
     }
 }

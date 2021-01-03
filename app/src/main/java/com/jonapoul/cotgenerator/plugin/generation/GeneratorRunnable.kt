@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.atakmap.android.maps.MapView
 import com.atakmap.comms.CotDispatcher
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
-import com.jonapoul.sharedprefs.parseIntFromPair
+import com.jonapoul.sharedprefs.getIntFromPair
 import timber.log.Timber
 
 internal class GeneratorRunnable(
@@ -49,7 +49,7 @@ internal class GeneratorRunnable(
 
     private fun generationPeriodMs(startNs: Long): Long {
         val generationTimeMs = (System.nanoTime() - startNs) / 1_000_000L
-        val updatePeriodMs = prefs.parseIntFromPair(Prefs.UPDATE_PERIOD) * 1000L
+        val updatePeriodMs = prefs.getIntFromPair(Prefs.PERIOD) * 1000L
         return updatePeriodMs - generationTimeMs
     }
 }

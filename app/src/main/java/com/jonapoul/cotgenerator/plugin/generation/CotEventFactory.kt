@@ -14,10 +14,7 @@ import com.jonapoul.cotgenerator.plugin.generation.streams.IRandomStream
 import com.jonapoul.cotgenerator.plugin.generation.streams.IntRandomStream
 import com.jonapoul.cotgenerator.plugin.generation.streams.RadialDistanceRandomStream
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
-import com.jonapoul.sharedprefs.getBooleanFromPair
-import com.jonapoul.sharedprefs.getStringFromPair
-import com.jonapoul.sharedprefs.parseDoubleFromPair
-import com.jonapoul.sharedprefs.parseIntFromPair
+import com.jonapoul.sharedprefs.*
 import timber.log.Timber
 import java.util.*
 import kotlin.collections.ArrayList
@@ -115,21 +112,21 @@ internal class CotEventFactory(
     private fun grabValuesFromPreferences() {
         useRandomCallsigns = prefs.getBooleanFromPair(Prefs.USE_RANDOM_CALLSIGNS)
         useIndexedCallsigns = prefs.getBooleanFromPair(Prefs.USE_INDEXED_CALLSIGN)
-        useRandomTeams = prefs.getBooleanFromPair(Prefs.USE_RANDOM_TEAM_COLOURS)
+        useRandomTeams = prefs.getBooleanFromPair(Prefs.USE_RANDOM_TEAMS)
         useRandomRoles = prefs.getBooleanFromPair(Prefs.USE_RANDOM_ROLES)
-        iconCount = prefs.parseIntFromPair(Prefs.ICON_COUNT)
-        distributionRadius = prefs.parseDoubleFromPair(Prefs.RADIAL_DISTRIBUTION)
+        iconCount = prefs.getIntFromPair(Prefs.COUNT)
+        distributionRadius = prefs.getIntFromPair(Prefs.RADIUS).toDouble()
         followGps = prefs.getBooleanFromPair(Prefs.FOLLOW_SELF_MARKER)
         centreLat = prefs.parseDoubleFromPair(Prefs.CENTRE_LATITUDE)
         centreLon = prefs.parseDoubleFromPair(Prefs.CENTRE_LONGITUDE)
         stayAtGroundLevel = prefs.getBooleanFromPair(Prefs.STAY_AT_GROUND_LEVEL)
         centreAlt = if (stayAtGroundLevel) 0.0 else prefs.parseDoubleFromPair(Prefs.CENTRE_ALTITUDE)
-        staleTimer = prefs.parseIntFromPair(Prefs.STALE_TIMER)
-        movementSpeed = prefs.parseDoubleFromPair(Prefs.MOVEMENT_SPEED)
+        staleTimer = prefs.getIntFromPair(Prefs.STALE_TIMER)
+        movementSpeed = prefs.getIntFromPair(Prefs.SPEED).toDouble()
 
         /* Stop any fuckery with distribution radii */
         movementSpeed = min(movementSpeed, distributionRadius / 2.0)
-        travelDistance = movementSpeed * prefs.parseIntFromPair(Prefs.UPDATE_PERIOD)
+        travelDistance = movementSpeed * prefs.getIntFromPair(Prefs.PERIOD)
     }
 
     private fun updateDistributionCentre() {
