@@ -34,6 +34,7 @@ class CentrePointView @JvmOverloads constructor(
 
     override val layoutResource = R.layout.home_screen_centre_point
     override val titleStringResource = R.string.centre_point_section_title
+    override val isVisiblePref = Prefs.IS_VISIBLE_CENTRE_POINT
 
     private val timeUpdater by lazy { TimeViewUpdater(mapView, REFRESH_INTERVAL_MS) }
 

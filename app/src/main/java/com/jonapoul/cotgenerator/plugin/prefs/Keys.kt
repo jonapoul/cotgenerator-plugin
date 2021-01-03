@@ -29,4 +29,9 @@ object Keys {
     val RADIAL_DISTRIBUTION = get("radial_distribution")
     val MOVEMENT_SPEED = get("movement_speed")
     val UPDATE_PERIOD = get("update_period")
+
+    /* View visibility settings */
+    val IS_VISIBLE_CENTRE_POINT = get("is_visible_centre_point")
+    val IS_VISIBLE_CALLSIGN = get("is_visible_callsign")
+    val IS_VISIBLE_COT_DATA = get("is_visible_cot_data")
 }

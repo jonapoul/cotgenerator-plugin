@@ -1,5 +1,6 @@
 package com.jonapoul.cotgenerator.plugin.prefs
 
+import com.atakmap.coremap.conversions.CoordinateFormat
 import com.jonapoul.cotgenerator.plugin.cot.CotRole
 import com.jonapoul.cotgenerator.plugin.cot.CotTeam
 
@@ -30,4 +31,9 @@ object Defaults {
     const val RADIAL_DISTRIBUTION = "200"
     const val MOVEMENT_SPEED = "5"
     const val UPDATE_PERIOD = "5"
+
+    /* View visibility settings */
+    const val IS_VISIBLE_CENTRE_POINT = true
+    const val IS_VISIBLE_CALLSIGN = true
+    const val IS_VISIBLE_COT_DATA = true
 }

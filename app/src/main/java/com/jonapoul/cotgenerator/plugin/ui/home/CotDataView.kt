@@ -25,6 +25,7 @@ class CotDataView @JvmOverloads constructor(
 
     override val layoutResource = R.layout.home_screen_cot_data
     override val titleStringResource = R.string.cot_data_section_title
+    override val isVisiblePref = Prefs.IS_VISIBLE_COT_DATA
 
     private val iconCountSeekbar: SeekBar by lazy { findViewById(R.id.cot_data_icon_count_seek_bar) }
     private val iconCountTextView: TextView by lazy { findViewById(R.id.cot_data_icon_count_text_view) }

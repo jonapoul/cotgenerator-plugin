@@ -25,6 +25,7 @@ class CallsignView @JvmOverloads constructor(
 
     override val layoutResource = R.layout.home_screen_callsign
     override val titleStringResource = R.string.callsign_section_title
+    override val isVisiblePref = Prefs.IS_VISIBLE_CALLSIGN
 
     private val randomiseCheckbox: CheckBox by lazy { findViewById(R.id.callsign_use_random_checkbox) }
     private val indexedCheckbox: CheckBox by lazy { findViewById(R.id.callsign_use_indexed_checkbox) }

@@ -14,7 +14,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.atakmap.android.maps.MapView
 import com.jonapoul.cotgenerator.plugin.R
-import timber.log.Timber
+import com.jonapoul.sharedprefs.PrefPair
+import com.jonapoul.sharedprefs.getBooleanFromPair
 
 abstract class HomeScreenView @JvmOverloads constructor(
     context: Context,
@@ -26,6 +27,7 @@ abstract class HomeScreenView @JvmOverloads constructor(
 
     protected abstract val layoutResource: Int
     protected abstract val titleStringResource: Int
+    protected abstract val isVisiblePref: PrefPair<Boolean>
 
     init {
         inflate(pluginContext, R.layout.home_screen_base, this)
@@ -34,7 +36,7 @@ abstract class HomeScreenView @JvmOverloads constructor(
     private val sectionBody: FrameLayout by lazy { findViewById(R.id.section_body) }
     private val toggleButton: ImageView by lazy { findViewById(R.id.toggle_view_button) }
 
-    private var viewState = View.VISIBLE
+    private var isVisible = true
 
     protected val mapView: MapView
         get() = mv!!
@@ -61,20 +63,11 @@ abstract class HomeScreenView @JvmOverloads constructor(
 
         /* Toggle view visibility on button press */
         findViewById<ConstraintLayout>(R.id.section_header).setOnClickListener {
-            Timber.i("viewState before = $viewState")
-            when (viewState) {
-                View.VISIBLE -> {
-                    viewState = View.GONE
-                    toggleButton.setImageResource(R.drawable.arrow_down)
-                }
-                View.GONE -> {
-                    viewState = View.VISIBLE
-                    toggleButton.setImageResource(R.drawable.arrow_up)
-                }
-            }
-            Timber.i("viewState after = $viewState")
-            sectionBody.visibility = viewState
+            setSectionBodyVisibility(shouldBeVisible = !isVisible)
         }
+
+        /* Set initial visibility of the view based on previous usage */
+        setSectionBodyVisibility(shouldBeVisible = prefs.getBooleanFromPair(isVisiblePref))
     }
 
     override fun onDetachedFromWindow() {
@@ -85,6 +78,18 @@ abstract class HomeScreenView @JvmOverloads constructor(
     protected fun setTextViewEnabled(textView: TextView, isEnabled: Boolean) {
         val colour = if (isEnabled) Color.WHITE else Color.GRAY
         textView.setTextColor(colour)
+    }
+
+    private fun setSectionBodyVisibility(shouldBeVisible: Boolean) {
+        if (shouldBeVisible) {
+            toggleButton.setImageResource(R.drawable.arrow_up)
+            sectionBody.visibility = View.VISIBLE
+        } else {
+            toggleButton.setImageResource(R.drawable.arrow_down)
+            sectionBody.visibility = View.GONE
+        }
+        isVisible = shouldBeVisible
+        prefs.edit().putBoolean(isVisiblePref.key, isVisible).apply()
     }
 
     companion object {
