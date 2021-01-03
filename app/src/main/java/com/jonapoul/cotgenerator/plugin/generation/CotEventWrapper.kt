@@ -36,7 +36,7 @@ internal class CotEventWrapper {
             addChild(getContact(callsign))
             addChild(getGroup(prefs))
             addChild(getStatus(selfMarker))
-            addChild(getTakv())
+            addChild(TAKV)
             addChild(getTrack(movementSpeed))
             precisionLocationHandler.toCotDetail(selfMarker, event, this)
         }
@@ -108,15 +108,6 @@ internal class CotEventWrapper {
         return status
     }
 
-    private fun getTakv(): CotDetail {
-        val takv = CotDetail("takv")
-        takv.setAttribute("platform", "COT-GENERATOR-PLUGIN")
-        takv.setAttribute("version", BuildConfig.VERSION_NAME)
-        takv.setAttribute("device", TakVersionDetailHandler.getDeviceDescription())
-        takv.setAttribute("os", TakVersionDetailHandler.getDeviceOS())
-        return takv
-    }
-
     private fun getTrack(speed: Double, course: Double = offset.theta): CotDetail {
         val track = CotDetail("track")
         track.setAttribute("course", course.toString())
@@ -146,5 +137,15 @@ internal class CotEventWrapper {
                 oldPoint.le
             )
         )
+    }
+
+    private companion object {
+        /* Shared instance, since this is the same for all dots and doesn't change over time. */
+        val TAKV = CotDetail("takv").also {
+            it.setAttribute("platform", "COT-GENERATOR-PLUGIN")
+            it.setAttribute("version", BuildConfig.VERSION_NAME)
+            it.setAttribute("device", TakVersionDetailHandler.getDeviceDescription())
+            it.setAttribute("os", TakVersionDetailHandler.getDeviceOS())
+        }
     }
 }
