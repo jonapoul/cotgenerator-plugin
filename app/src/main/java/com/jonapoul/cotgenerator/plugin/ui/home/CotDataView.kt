@@ -12,6 +12,7 @@ import com.jonapoul.cotgenerator.plugin.R
 import com.jonapoul.cotgenerator.plugin.prefs.Keys
 import com.jonapoul.cotgenerator.plugin.prefs.Prefs
 import com.jonapoul.sharedprefs.*
+import kotlin.math.max
 
 class CotDataView @JvmOverloads constructor(
     context: Context,
@@ -113,10 +114,10 @@ class CotDataView @JvmOverloads constructor(
         randomRoleCheckbox.isChecked = prefs.getBooleanFromPair(Prefs.USE_RANDOM_ROLES)
 
         teamSpinner.setSelection(
-            allTeams.indexOf(prefs.getStringFromPair(Prefs.TEAM))
+            max(allTeams.indexOf(prefs.getStringFromPair(Prefs.TEAM)), 0)
         )
         roleSpinner.setSelection(
-            allRoles.indexOf(prefs.getStringFromPair(Prefs.ROLE))
+            max(allRoles.indexOf(prefs.getStringFromPair(Prefs.ROLE)), 0)
         )
     }
 

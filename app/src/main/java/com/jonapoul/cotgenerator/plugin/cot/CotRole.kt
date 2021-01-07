@@ -8,7 +8,7 @@ import java.util.*
 
 enum class CotRole(private val role: String) {
     TEAM_MEMBER("Team Member"),
-    TEAM_LEADER("Team Leader"),
+    TEAM_LEAD("Team Lead"),
     HQ("HQ"),
     SNIPER("Sniper"),
     MEDIC("Medic"),
