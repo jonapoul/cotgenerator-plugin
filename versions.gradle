@@ -7,7 +7,7 @@ ext.versions = [
         buildTools              : '29.0.3',
 
         // TAK
-        cotgenerator_plugin     : '1.0',
+        cotgenerator_plugin     : '1.0.1',
         atak                    : '4.2.0',
         takdev                  : '2.0.0',
 
