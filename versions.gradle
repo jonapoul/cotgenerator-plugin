@@ -2,8 +2,8 @@ ext.versions = [
         // Build variables
         minSdk                  : 21,
         targetSdk               : 28,
-        gradle                  : '4.1.1',
-        kotlin                  : '1.4.21',
+        gradle                  : '4.1.3',
+        kotlin                  : '1.4.32',
         buildTools              : '29.0.3',
 
         // TAK
@@ -14,13 +14,13 @@ ext.versions = [
         // Libraries
         androidx_core           : '1.3.2',
         constraintlayout        : '2.0.4',
-        fragment                : '1.2.5',
-        lifecycle               : '2.2.0',
-        recyclerview            : '1.1.0',
+        fragment                : '1.3.2',
+        lifecycle               : '2.3.1',
+        recyclerview            : '1.2.0',
         sharedprefs             : '1.0.4',
         timber                  : '4.7.1',
 
         // Testing
-        junit                   : '4.13.1',
-        mockk                   : '1.10.2',
+        junit                   : '4.13.2',
+        mockk                   : '1.11.0',
 ]
